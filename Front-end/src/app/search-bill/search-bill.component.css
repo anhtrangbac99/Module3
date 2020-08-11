@@ -36,3 +36,14 @@
     margin: 10px 20px 10px 10px;
 }
 
+
+.add-bill-button{
+  position: -webkit-sticky;
+  position: sticky;
+  height: 65px;
+  margin: 0px 10px 10px 0px;
+  left : 100%;
+  top : 95%;
+  border-radius: 50%;
+  background-color: #f0ffff;
+}

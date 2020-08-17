@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package protobuf;
+
+service SignIn{
+    rpc UserAuthor(AuthorRequest) returns (AuthorRespone){};
+}
+
+message AuthorRequest{
+    string Username = 1;
+    string Password = 2;
+}
+
+message AuthorRespone{
+    int64 IsExisted = 1;
+    int64 User_Id = 2;
+    int64 Authorized = 3;
+}

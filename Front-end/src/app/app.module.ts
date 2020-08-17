@@ -1,3 +1,4 @@
+import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -12,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog' ;
+import { Action } from 'rxjs/internal/scheduler/Action';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -26,9 +29,13 @@ import {MatDialogModule} from '@angular/material/dialog' ;
     AppRoutingModule,
     BrowserAnimationsModule,
     MatButtonModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [
+    SignInComponent
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

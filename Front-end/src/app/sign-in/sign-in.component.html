@@ -11,16 +11,26 @@
 <body>
   <div class="center formContent" >
       <h1>Login form</h1>
-      <form>
-          <input type="text" id="username" name="username" placeholder="username">
-          <input type="text" id="password"name="login" placeholder="password">
-      </form>
-      <form>
+      <form (ngsubmit)=(SendLoginForm())>
         <div class="form-row">
-          <div class="form-group col-md-2">
+          <div class="form-group col-md-12">
+            <input type="username" [(ngModel)]="username" id="username" name="username" placeholder="username">
           </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-12">
+            <input type="password" [(ngModel)]="password" id="password"name="login" placeholder="password">
+          </div>
+        </div>
+
+
+        <div class="form-row">
           <div class="form-group col-md-4">
-            <button type="button" class="btn btn-primary" routerLink="/searchBill" routerLinkActive="active">Sign in</button>
+          </div>
+          <div class="form-group col-md-2">
+            <!-- <button type="button" class="btn btn-primary" routerLink="/searchBill" routerLinkActive="active">Sign in</button> -->
+            <button type="button" class="btn btn-primary" (click)="SendLoginForm()">Sign in</button>
           </div>
           <div class="form-group col-md-2">
             <button type="button" class="btn btn-warning" >Sign up</button>

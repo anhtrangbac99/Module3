@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+package api.merchant;
+
+
+import "google/api/annotations.proto";
+
+
+service MerchantMiddlewareService {
+    rpc UserAuthor(AuthorRequest) returns (AuthorRespone){
+        option (google.api.http) = {
+			post: "/v1/Author"
+            body: "shelf"
+		};
+    }
+    rpc SearchBill(SearchBillRequest) returns (stream SearchBillRespone) {
+        option (google.api.http) = {
+			post: "/v1/SearchBill"
+		};
+    }
+    rpc CreateBill(CreateBillRequest) returns (CreateBillRespone){
+        option (google.api.http) = {
+			post: "/v1/CreateBill"
+		};
+    }
+}
+
+message AuthorRequest{
+    string Username = 1;
+    string Password = 2;
+}
+
+message AuthorRespone{
+    int64 IsExisted = 1;
+    int64 User_Id = 2;
+    int64 Authorized = 3;
+}
+
+message SearchBillRequest{
+    int64 BillId = 1;
+    int64 BillStatus = 2;
+    int64 ItemId = 3;
+    int64 Amount = 4;
+    int64 CustomerId = 5;
+    string CustomerPhone = 6;
+    string BillDesc = 7;
+    string ItemName = 8;
+    string CustomerName = 9;    
+}
+
+message SearchBillRespone{
+    int64 BillId = 1;
+    int64 BillStatus = 2;
+    int64 ItemId = 3;
+    int64 Amount = 4;
+    int64 CustomerId = 5;
+    string CustomerPhone = 6;
+    string BillDesc = 7;
+    string ItemName = 8;
+    string CustomerName = 9;    
+}
+
+message CreateBillRequest{
+    int64 ItemId = 3;
+    int64 Amount = 4;
+    int64 CustomerId = 5;
+    string BillDesc = 7; 
+}
+
+message CreateBillRespone{
+    int64 IsSaved = 1;
+}

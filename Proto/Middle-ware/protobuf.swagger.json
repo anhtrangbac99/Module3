@@ -1,0 +1,213 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "protobuf.proto",
+    "version": "version not set"
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/v1/Author": {
+      "post": {
+        "operationId": "MerchantMiddlewareService_UserAuthor",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/merchantAuthorRespone"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "tags": [
+          "MerchantMiddlewareService"
+        ]
+      }
+    },
+    "/v1/CreateBill": {
+      "post": {
+        "operationId": "MerchantMiddlewareService_CreateBill",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/merchantCreateBillRespone"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "tags": [
+          "MerchantMiddlewareService"
+        ]
+      }
+    },
+    "/v1/SearchBill": {
+      "post": {
+        "operationId": "MerchantMiddlewareService_SearchBill",
+        "responses": {
+          "200": {
+            "description": "A successful response.(streaming responses)",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "result": {
+                  "$ref": "#/definitions/merchantSearchBillRespone"
+                },
+                "error": {
+                  "$ref": "#/definitions/runtimeStreamError"
+                }
+              },
+              "title": "Stream result of merchantSearchBillRespone"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "tags": [
+          "MerchantMiddlewareService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "merchantAuthorRespone": {
+      "type": "object",
+      "properties": {
+        "IsExisted": {
+          "type": "string",
+          "format": "int64"
+        },
+        "User_Id": {
+          "type": "string",
+          "format": "int64"
+        },
+        "Authorized": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "merchantCreateBillRespone": {
+      "type": "object",
+      "properties": {
+        "IsSaved": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "merchantSearchBillRespone": {
+      "type": "object",
+      "properties": {
+        "BillId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "BillStatus": {
+          "type": "string",
+          "format": "int64"
+        },
+        "ItemId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "Amount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "CustomerId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "CustomerPhone": {
+          "type": "string"
+        },
+        "BillDesc": {
+          "type": "string"
+        },
+        "ItemName": {
+          "type": "string"
+        },
+        "CustomerName": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "type_url": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string",
+          "format": "byte"
+        }
+      }
+    },
+    "runtimeError": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string"
+        },
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "runtimeStreamError": {
+      "type": "object",
+      "properties": {
+        "grpc_code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "http_code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "http_status": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    }
+  }
+}

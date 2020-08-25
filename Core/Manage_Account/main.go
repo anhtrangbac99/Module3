@@ -37,7 +37,7 @@ func AccessDB() (*sql.DB){
 
 func (signInServer *SignInServer) UserAuthor(ctx context.Context,request *pb.AuthorRequest) (*pb.AuthorRespone,error){
 	DB := AccessDB()
-
+	fmt.Println(request.GetUsername())
 	selectedUsers, err := DB.Query("SELECT User_Id,Username,Password,Authorized FROM User WHERE Username='" + request.GetUsername() +"';")
 	
 	isExisted := -1
@@ -59,6 +59,7 @@ func (signInServer *SignInServer) UserAuthor(ctx context.Context,request *pb.Aut
 				isExisted = 1
 				user_Id = selectedUser.User_Id
 				authorized = selectedUser.Authorized
+				break;
 			} else {
 				isExisted = 1
 			}
@@ -72,14 +73,14 @@ func main(){
 	grpcServer := grpc.NewServer()
 	pb.RegisterSignInServer(grpcServer,new(SignInServer))
 
-	fmt.Println("Listening to port 5000")
+	fmt.Println("Listening to port 6000")
 	Wg := sync.WaitGroup{}
 
 	Wg.Add(1)
 	go func(){
 		defer Wg.Done()
 		
-		lis,err := net.Listen("tcp",":5000")
+		lis,err := net.Listen("tcp",":6000")
 		
 		if err != nil {
 			log.Fatal(err)

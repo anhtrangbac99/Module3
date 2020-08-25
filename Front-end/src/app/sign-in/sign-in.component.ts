@@ -14,8 +14,8 @@ import {Headers} from '@angular/http'
 })
 
 export class SignInComponent implements OnInit {
-  // private username :any
-  // private password : any
+  public username :any
+  public password : any
   
   constructor (private http: Http){
     let username: any;
@@ -40,21 +40,10 @@ export class SignInComponent implements OnInit {
       Password : this.password,
     }
 
-    var header: RequestOptionsArgs["headers"]
-    let headers = new Headers()
-    var temp : string
-    temp = "origin-list"
-    headers.append('Content-Type', 'application/json');
-    headers.append('Accept', 'application/json');
+    console.log(LoginForm)
+    // this.http.post(`${environment.serverUrl}`,LoginForm,new RequestOptions({headers: headers})).toPromise()
 
-    headers.append('Access-Control-Allow-Origin',temp);
-    headers.append('Access-Control-Allow-Credentials', 'true');
-    // this.createAuthorizationHeader(header)
-    console.log(headers)
-    let options = new RequestOptions({headers: headers });
-    this.http.post(`${environment.serverUrl}/SignIn`,LoginForm,new RequestOptions({headers: headers})).toPromise()
-
-    //APIService.POST(`${environment.serverUrl}/SignIn`,LoginForm)
+    APIService.POST(`${environment.serverUrl}/v1/Author`,LoginForm)
   }
 
 }

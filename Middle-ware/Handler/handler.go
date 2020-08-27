@@ -6,19 +6,23 @@ import (
 	grpc "google.golang.org/grpc"
 	"fmt"
 	"log"
-	//"glog"
+
 	"io"
 	pbSignIn "google.golang.org/grpc/examples/App/Proto/SignIn"
 	pbManageBill "google.golang.org/grpc/examples/App/Proto/ManageBill"
+	pbManageSupport "google.golang.org/grpc/examples/App/Proto/ManageSupport"
 	"database/sql"
 	"github.com/jinzhu/copier"
-
+	"github.com/golang/glog"
 )
 const merchantManageAcountCoreHost = "127.0.0.1:6000"
 const merchantManageBillCoreHost = "127.0.0.1:6001"
+const merchantManageSupportCoreHost = "127.0.0.1:6002"
+
 type merchantHandler struct {
 	MerchantManageAccountCoreService pbSignIn.SignInClient
 	MerchantManageBillCoreService pbManageBill.ManageBillClient
+	MerchantManageSupportCoreService pbManageSupport.ManageSupportClient
 	pb.UnimplementedMerchantMiddlewareServiceServer
 }
 
@@ -33,13 +37,20 @@ func NewMerchantMiddlewareHanlder() pb.MerchantMiddlewareServiceServer{
 		log.Fatal(err)
 	}
 
+	connManageSupport,err := grpc.Dial(merchantManageSupportCoreHost,grpc.WithInsecure())
+	if err != nil {
+		log.Fatal(err)
+	}
+
 	clientSignIn := pbSignIn.NewSignInClient(connManageAccount)
 
 	clientManageBill := pbManageBill.NewManageBillClient(connManageBill)
 
+	clientManageSupport := pbManageSupport.NewManageSupportClient(connManageSupport)
 	return &merchantHandler{
 		MerchantManageAccountCoreService: clientSignIn,
 		MerchantManageBillCoreService: clientManageBill,
+		MerchantManageSupportCoreService: clientManageSupport,
 	}
 }
 
@@ -57,6 +68,7 @@ func AccessDB() (*sql.DB){
 }
 
 func (sv *merchantHandler) UserAuthor(ctx context.Context, request *pb.AuthorRequest) (*pb.AuthorRespone,error){
+	glog.Info("UserAuthor request:",request)
 	client := sv.MerchantManageAccountCoreService
 
 	reqToCore := pbSignIn.AuthorRequest{}
@@ -64,15 +76,12 @@ func (sv *merchantHandler) UserAuthor(ctx context.Context, request *pb.AuthorReq
 	if err:= copier.Copy(&reqToCore,request);err!= nil {
 		log.Fatal(err)
 	}
-	fmt.Printf("request: %+v",request)
 	//fmt.Println(reqToCore)
 	result,err := client.UserAuthor(context.Background(),&pbSignIn.AuthorRequest{Username: request.GetUsername() , Password: request.GetPassword()})
 
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println(result.GetUser_Id())
-	fmt.Println(result)
 	//respone,err := json.Marshal(&result)
 
 	//writer.Write(respone)
@@ -81,37 +90,47 @@ func (sv *merchantHandler) UserAuthor(ctx context.Context, request *pb.AuthorReq
 }
 
 func (sv *merchantHandler) CreateBill(ctx context.Context, request *pb.CreateBillRequest) (*pb.CreateBillRespone,error){
-	connect,err := grpc.Dial("localhost:6001",grpc.WithInsecure(),grpc.WithBlock())
-	defer connect.Close()
+	// connect,err := grpc.Dial("localhost:6001",grpc.WithInsecure(),grpc.WithBlock())
+	// defer connect.Close()
 
-	if err != nil {
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
+	glog.Info("Create Bill request: ", request)
+
+	client := sv.MerchantManageBillCoreService
+	
+	reqToCore := pbManageBill.CreateBillRequest{}
+
+	if err:=copier.Copy(&reqToCore,request);err != nil{
 		log.Fatal(err)
 	}
 
-	client := pbManageBill.NewManageBillClient(connect)
-
-	result,err := client.CreateBill(context.Background(),&pbManageBill.CreateBillRequest{ItemId:int64(1),Amount:int64(2),CustomerId:int64(2),BillDesc:"None"})
+	result,_ := client.CreateBill(context.Background(),&reqToCore)
 	fmt.Println(result.GetIsSaved())
+
 	respone := pb.CreateBillRespone{IsSaved:result.GetIsSaved()}
 	return &respone,nil
 }
 
-func  (sv *merchantHandler) SearchBill(request *pb.SearchBillRequest,stream_api pb.MerchantMiddlewareService_SearchBillServer) error{
-	connect,err := grpc.Dial("localhost:6001",grpc.WithInsecure(),grpc.WithBlock())
-	defer connect.Close()
+func  (sv *merchantHandler) SearchBill(ctx context.Context,request *pb.SearchBillRequest) (*pb.ListSearchBillRespone,error){
 
-	if err != nil {
+	glog.Info("SearchBill request: ", request)
+
+	reqToCore := pbManageBill.SearchBillRequest{}
+
+	if err:=copier.Copy(&reqToCore,request);err != nil{
 		log.Fatal(err)
 	}
 
-	client := pbManageBill.NewManageBillClient(connect)
-	temp := pbManageBill.SearchBillRequest{BillDesc:"hhhhh"}
+	client := sv.MerchantManageBillCoreService
 
-	stream,_ := client.SearchBill(context.Background(),&temp)
+	stream,_ := client.SearchBill(context.Background(),&reqToCore)
 	
+	listRespone:= []*pb.SearchBillRespone{}
 	for {
 		result,err := stream.Recv()
-
+		respone := pb.SearchBillRespone{}
 		if err == io.EOF {
 			break
 		}
@@ -120,8 +139,64 @@ func  (sv *merchantHandler) SearchBill(request *pb.SearchBillRequest,stream_api 
 			log.Fatal(err)
 		}
 
-		fmt.Println(result)
+		if err := copier.Copy(&respone,result);err != nil {
+			log.Fatal(err)
+		}
+		listRespone = append(listRespone,&respone)
+		fmt.Println(respone)
 	}
 
-	return nil
+	return &pb.ListSearchBillRespone{SearchBillRespones:listRespone},nil
+}
+
+func (sv *merchantHandler) GetListItem(ctx context.Context,request *pb.ListItemRequest) (*pb.ListItemRespone,error){
+	glog.Info("Get List Item request: " ,request)
+
+	client := sv.MerchantManageSupportCoreService
+
+	stream,_ := client.GetListItem(context.Background(),&pbManageSupport.ListItemRequest{})
+
+	ListItem := []*pb.Item{}
+	for {
+		result,err := stream.Recv()
+		item := pb.Item{}
+		if err == io.EOF {
+			break
+		}
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		if err := copier.Copy(&item,result);err != nil {
+			log.Fatal(err)
+		}
+		ListItem = append(ListItem,&item)
+		fmt.Println(item)
+	}
+
+	return &pb.ListItemRespone{Item:ListItem},nil
+
+}
+
+func (sv *merchantHandler) GetCustomer(ctx context.Context,request *pb.CustomerRequest) (*pb.CustomerRespone,error){
+	glog.Info("Get Cusomter request",request)
+
+	reqToCore := pbManageSupport.CustomerRequest{}
+
+	if err := copier.Copy(&reqToCore,request);err!=nil{
+		log.Fatal(err)
+	}
+
+	client := sv.MerchantManageSupportCoreService
+
+	result,_ := client.GetCustomer(context.Background(),&reqToCore) 
+
+	respone := pb.CustomerRespone{}
+
+	if err := copier.Copy(&respone,result);err!=nil{
+		log.Fatal(err)
+	}
+	fmt.Println()
+	return &respone,nil
 }

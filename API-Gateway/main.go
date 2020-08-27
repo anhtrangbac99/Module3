@@ -6,9 +6,9 @@ import (
 	"strings"
 	"fmt"
 	"google.golang.org/grpc"
-	//"path"
-	"log"
-	"encoding/json"
+	"path"
+	//"log"
+	//"encoding/json"
 	gwMerchant "google.golang.org/grpc/examples/App/Proto/Middle-ware"
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
@@ -28,7 +28,16 @@ type User struct{
 
 var (
 	merchantEnpoint = flag.String("merchant", merchantEndpoint, "endpoint of merchant")
+	swaggerDir      = flag.String("swagger", "swagger", "path to the directory which contains swagger definitions")
 )
+
+func serveSwagger(w http.ResponseWriter, r *http.Request) {
+
+	glog.Infof("Serving %s", r.URL.Path)
+	p := strings.TrimPrefix(r.URL.Path, "/swagger/")
+	p = path.Join(*swaggerDir, p)
+	http.ServeFile(w, r, p)
+}
 
 func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handler, error) {
 	mux := runtime.NewServeMux(opts...)
@@ -55,14 +64,6 @@ func preflightHandler(w http.ResponseWriter, r *http.Request) {
 // allowCORS allows Cross Origin Resoruce Sharing from any origin.
 func allowCORS(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		var user User
-	
-		err := json.NewDecoder(r.Body).Decode(&user)
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		fmt.Println(user)
 		if origin := r.Header.Get("Origin"); origin != "" {
 			w.Header().Set("Access-Control-Allow-Origin", origin)
 			if r.Method == "OPTIONS" && r.Header.Get("Access-Control-Request-Method") != "" {
@@ -85,14 +86,14 @@ func Run(address string, opts ...runtime.ServeMuxOption) error {
 	//mux := runtime.NewServeMux()
 	mux := http.NewServeMux()
 	//router := mux.NewRouter()
+	mux.HandleFunc("/swagger/", serveSwagger)
+
 	gw, err := newGateway(ctx, opts...)
 	if err != nil {
 		return err
 	}
 	mux.Handle("/", gw)
-	mux.HandleFunc("/s",func(w http.ResponseWriter, r *http.Request){
-		fmt.Println("sssss")
-	})
+
 	return http.ListenAndServe(address, allowCORS(mux))
 }
 

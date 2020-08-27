@@ -1,9 +1,4 @@
-<!-- <div class="wrapper">
-    <div class="one"> 
-        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search"> 
-    </div>
-    <div class="two"></div>
-</div> -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,13 +17,13 @@
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label >Bill Id</label>
-                <input type="text" class="form-control" id="BillId" placeholder="BillId">
+                <input [(ngModel)]="BillId" name="BillId" type="text" class="form-control" id="BillId" placeholder="BillId">
             </div>
 
             <div class="form-group col-md-4">
                 <label >Bill Status</label>
-                <select id="BillStatus" class="form-control">
-                <option selected>Mới tạo</option>
+                <select [(ngModel)]="BillStatus" name="BillStatus" id="BillStatus" class="form-control">
+                <option>Mới tạo</option>
                 <option>Đã thanh toán</option>
                 <option>Đã hủy</option>
                 </select>
@@ -36,40 +31,47 @@
 
             <div class="form-group col-md-4">
                 <label>Amount</label>
-                <input type="text" class="form-control" id="Amount" placeholder="Amount">
+                <input [(ngModel)]="Amount" name="Amount" type="text" class="form-control" id="Amount" placeholder="Amount">
             </div>
         </div>
 
         <div class="form-row">
             <div class="form-group col-md-4">
                 <label>Item Id</label>
-                <input type="text" class="form-control" id="ItemId" placeholder="ItemId">
+                <input [(ngModel)]="ItemId" name="ItemId" type="text" class="form-control" id="ItemId" placeholder="ItemId">
             </div>
 
             <div class="form-group col-md-4">
                 <label>Customer Id</label>
-                <input type="text" class="form-control" id="CustomerId" placeholder="CustomerId">
+                <input [(ngModel)]="CustomerId" name="CustomerId" type="text" class="form-control" id="CustomerId" placeholder="CustomerId">
             </div>
 
             <div class="form-group col-md-4">
                 <label>Customer Phone</label>
-                <input type="text" class="form-control" id="CustomerPhone" placeholder="CustomerPhone">
+                <input [(ngModel)]="CustomerPhone" name="CustomerPhone" type="text" class="form-control" id="CustomerPhone" placeholder="CustomerPhone">
             </div>
         </div>
 
         <div class="form-row">
-            <div class="form-group col-md-8">
-                <label>Text</label>
-                <input type="text" class="form-control" id="Text" placeholder="Text">
+            <div class="form-group col-md-4">
+                <label>Bill Desc</label>
+                <input [(ngModel)]="BillDesc" name="BillDesc" type="text" class="form-control" id="BillDesc" placeholder="BillDesc">
+            </div>
+            <div class="form-group col-md-4">
+                <label>Customer Name</label>
+                <input [(ngModel)]="CustomerName" name="CustomerName" type="text" class="form-control" id="CustomerName" placeholder="CustomerName">
             </div>
 
             <div class="form-group col-md-4">
-                <button type="submit" class="btn btn-primary">Search</button>
+                <label>Item Name</label>
+                <input [(ngModel)]="ItemName" name="ItemName" type="text" class="form-control" id="ItemName" placeholder="ItemName">
+            </div>
+            <div class="form-group col-md-2">
+                <button type="submit" (click)="SendSearchForm()" class="btn btn-primary">Search</button>
             </div>
         </div>
 
     </form>
-
     <table class="table">
         <thead>
             <th scope="col">Bill Id</th>
@@ -83,20 +85,25 @@
             <th scope="col">Bill Describe</th>
         </thead>
         <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>Kiet</td>
-              <td>Cap</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-              <td>Otto</td>
-              <td>@mdo</td>
-              <td>Mark</td>
-              <td>Otto</td>
-            </tr>
-        </tbody>
-    </table>
+                <tr *ngFor="let SearchResult of this.SearchResults">
+                        <th scope="row">{{SearchResult['BillId']}}</th>
+                        <td *ngIf="SearchResult['BillStatus']==1">Mới tạo</td>
+                        <td *ngIf="SearchResult['BillStatus']==2">Đã thanh toán</td>
+                        <td *ngIf="SearchResult['BillStatus']==3">Đã hủy</td>
 
+                        <td>{{SearchResult['Amount']}}</td>
+                        <td>{{SearchResult['ItemId']}}</td>
+                        <td>{{SearchResult['ItemName']}}</td>
+                        <td>{{SearchResult['CustomerId']}}</td>
+                        <td>{{SearchResult['CustomerPhone']}}</td>
+                        <td>{{SearchResult['CustomerName']}}</td>
+                        <td>{{SearchResult['BillDesc']}}</td>
+                </tr>
+        </tbody>
+
+    </table>
     <button mat-raised-button class="add-bill-button" (click)="openAddBillModal()">Add</button>
+
+    <!-- <button mat-raised-button class="add-bill-button" (click)="openAddBillModal()">Add</button> -->
 
 </body>

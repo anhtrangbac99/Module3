@@ -9,18 +9,32 @@ import "google/api/annotations.proto";
 service MerchantMiddlewareService {
     rpc UserAuthor(AuthorRequest) returns (AuthorRespone){
         option (google.api.http) = {
-			post: "/v1/Author"
-            body: "shelf"
+			post: "/v1/Merchant/Author"
+            body: "*"
 		};
     }
-    rpc SearchBill(SearchBillRequest) returns (stream SearchBillRespone) {
+    rpc SearchBill(SearchBillRequest) returns (ListSearchBillRespone) {
         option (google.api.http) = {
-			post: "/v1/SearchBill"
+			post: "/v1/Merchant/SearchBill"
+            body:"*"
 		};
     }
     rpc CreateBill(CreateBillRequest) returns (CreateBillRespone){
         option (google.api.http) = {
-			post: "/v1/CreateBill"
+			post: "/v1/Merchant/CreateBill"
+            body:"*"
+		};
+    }
+    rpc GetListItem(ListItemRequest) returns (ListItemRespone){
+        option (google.api.http) = {
+			get: "/v1/Merchant/ListItem"
+		};
+    }
+
+    rpc GetCustomer(CustomerRequest) returns (CustomerRespone){
+        option (google.api.http) = {
+			post: "/v1/Merchant/Customer"
+            body: "*"
 		};
     }
 }
@@ -60,6 +74,9 @@ message SearchBillRespone{
     string CustomerName = 9;    
 }
 
+message ListSearchBillRespone{
+    repeated SearchBillRespone SearchBillRespones = 1;
+}
 message CreateBillRequest{
     int64 ItemId = 3;
     int64 Amount = 4;
@@ -69,4 +86,27 @@ message CreateBillRequest{
 
 message CreateBillRespone{
     int64 IsSaved = 1;
+}
+
+message ListItemRequest{
+
+}
+
+message ListItemRespone{
+    repeated Item item = 1;
+}
+
+message Item{
+    string ItemName = 1;
+    int64 ItemId = 3;
+}
+
+message CustomerRequest{
+    string CustomerPhone = 1;
+}
+
+message CustomerRespone{
+    int64 CustomerId = 1;
+    string CustomerName = 2;
+    string CustomerPhone = 3;
 }

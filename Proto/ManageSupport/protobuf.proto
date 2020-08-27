@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package protobuf;
+
+service ManageSupport {
+    rpc GetListItem(ListItemRequest) returns (stream ListItemRespone){}
+    rpc GetCustomer(CustomerRequest) returns (CustomerRespone){}
+}
+
+message ListItemRequest{
+
+}
+
+message ListItemRespone{
+    string ItemName = 1;
+    int64 ItemId = 3;
+}
+
+message CustomerRequest{
+    string CustomerPhone = 1;
+}
+
+message CustomerRespone{
+    int64 CustomerId = 1;
+    string CustomerName = 2;
+    string CustomerPhone = 3;
+}

@@ -12,8 +12,17 @@ export class APIService {
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
-      body : data
-    }).then(response => response.json())
-    .then (data => console.log(data['IsExisted']))
+      body : JSON.stringify(data)
+    })
+  }
+
+  static GET(url){
+    return fetch(url, {
+      method: 'GET',
+      headers: new Headers({
+        'Content-Type': 'application/json'
+      }),
+      //body : JSON.stringify(data)
+    })
   }
 }

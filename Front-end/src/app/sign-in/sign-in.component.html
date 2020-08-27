@@ -33,7 +33,17 @@
             <button type="button" class="btn btn-primary" (click)="SendLoginForm()">Sign in</button>
           </div>
           <div class="form-group col-md-2">
-            <button type="button" class="btn btn-warning" >Sign up</button>
+            <button type="button" class="btn btn-warning" disabled >Sign up</button>
+          </div>
+          <div class="form-group col-md-4">
+          </div>
+        </div>
+
+        <div *ngIf='this.message!=" "' class="form-row">
+          <div class="form-group col-md-4">
+          </div>
+          <div class="form-group col-md-4">
+            {{this.message}}
           </div>
           <div class="form-group col-md-4">
           </div>

@@ -7,23 +7,37 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label >Bill Describe</label>
-                    <input type="text" class="form-control" id="BillDescribe" placeholder="BillDescribe">
+                    <input [(ngModel)]="BillDesc" name="BillDesc" type="text" class="form-control" id="BillDescribe" placeholder="Bill Describe">
                 </div>
             </div>
+
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label >Customer Phone</label>
-                    <input type="text" class="form-control" id="CustomerPhone" placeholder="CustomerPhone">
+                    <input [(ngModel)]="CustomerPhone" (keyup)="getCustomer()" name="CustomerPhone" type="text" class="form-control" id="CustomerPhone" placeholder="Customer Phone">
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label >Customer Name</label>
+                    <input type="text" class="form-control" id="CustomerName" placeholder="{{this.CustomerName}}" disabled>
                 </div>
             </div>
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label >List Items</label>
-                    <select id="ListItems" class="form-control">
-                    <option selected>Mới tạo</option>
-                    <option>Đã thanh toán</option>
-                    <option>Đã hủy</option>
+                    <!-- <select [(ngModel)]="ItemName" name="ItemName" id="ListItems" class="form-control"> -->
+                    <select [(ngModel)]="ItemName" name="ItemName" id="ItemName" class="form-control">
+                        <option selected *ngFor="let Item of this.ListItem" >{{Item['ItemName']}}</option>
                     </select>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-12">
+                    <label >Amount</label>
+                    <input [(ngModel)]="Amount" name="Amount" type="text" class="form-control" id="Amount" placeholder="Amount">
                 </div>
             </div>
 
@@ -34,7 +48,11 @@
                 <div class="form-group col-md-2">
                     <button type="submit" class="btn btn-warning" (click)="closeModal()">Close</button>
                 </div>
+                <div class="form-group col-md-8">
+                    <h2>{{ this.Message}}</h2>
+                </div>
             </div>
+
         </form>
     </section>
 </div>

@@ -370,6 +370,53 @@ func (x *SearchBillRespone) GetCustomerName() string {
 	return ""
 }
 
+type ListSearchBillRespone struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	SearchBillRespones []*SearchBillRespone `protobuf:"bytes,1,rep,name=SearchBillRespones,json=searchBillRespones,proto3" json:"SearchBillRespones,omitempty"`
+}
+
+func (x *ListSearchBillRespone) Reset() {
+	*x = ListSearchBillRespone{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protobuf_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListSearchBillRespone) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListSearchBillRespone) ProtoMessage() {}
+
+func (x *ListSearchBillRespone) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListSearchBillRespone.ProtoReflect.Descriptor instead.
+func (*ListSearchBillRespone) Descriptor() ([]byte, []int) {
+	return file_protobuf_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *ListSearchBillRespone) GetSearchBillRespones() []*SearchBillRespone {
+	if x != nil {
+		return x.SearchBillRespones
+	}
+	return nil
+}
+
 type CreateBillRequest struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -384,7 +431,7 @@ type CreateBillRequest struct {
 func (x *CreateBillRequest) Reset() {
 	*x = CreateBillRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protobuf_proto_msgTypes[4]
+		mi := &file_protobuf_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -397,7 +444,7 @@ func (x *CreateBillRequest) String() string {
 func (*CreateBillRequest) ProtoMessage() {}
 
 func (x *CreateBillRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_proto_msgTypes[4]
+	mi := &file_protobuf_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -410,7 +457,7 @@ func (x *CreateBillRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateBillRequest.ProtoReflect.Descriptor instead.
 func (*CreateBillRequest) Descriptor() ([]byte, []int) {
-	return file_protobuf_proto_rawDescGZIP(), []int{4}
+	return file_protobuf_proto_rawDescGZIP(), []int{5}
 }
 
 func (x *CreateBillRequest) GetItemId() int64 {
@@ -452,7 +499,7 @@ type CreateBillRespone struct {
 func (x *CreateBillRespone) Reset() {
 	*x = CreateBillRespone{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_protobuf_proto_msgTypes[5]
+		mi := &file_protobuf_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -465,7 +512,7 @@ func (x *CreateBillRespone) String() string {
 func (*CreateBillRespone) ProtoMessage() {}
 
 func (x *CreateBillRespone) ProtoReflect() protoreflect.Message {
-	mi := &file_protobuf_proto_msgTypes[5]
+	mi := &file_protobuf_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -478,7 +525,7 @@ func (x *CreateBillRespone) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateBillRespone.ProtoReflect.Descriptor instead.
 func (*CreateBillRespone) Descriptor() ([]byte, []int) {
-	return file_protobuf_proto_rawDescGZIP(), []int{5}
+	return file_protobuf_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *CreateBillRespone) GetIsSaved() int64 {
@@ -486,6 +533,256 @@ func (x *CreateBillRespone) GetIsSaved() int64 {
 		return x.IsSaved
 	}
 	return 0
+}
+
+type ListItemRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *ListItemRequest) Reset() {
+	*x = ListItemRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protobuf_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListItemRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListItemRequest) ProtoMessage() {}
+
+func (x *ListItemRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListItemRequest.ProtoReflect.Descriptor instead.
+func (*ListItemRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_proto_rawDescGZIP(), []int{7}
+}
+
+type ListItemRespone struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Item []*Item `protobuf:"bytes,1,rep,name=item,proto3" json:"item,omitempty"`
+}
+
+func (x *ListItemRespone) Reset() {
+	*x = ListItemRespone{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protobuf_proto_msgTypes[8]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListItemRespone) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListItemRespone) ProtoMessage() {}
+
+func (x *ListItemRespone) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_proto_msgTypes[8]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListItemRespone.ProtoReflect.Descriptor instead.
+func (*ListItemRespone) Descriptor() ([]byte, []int) {
+	return file_protobuf_proto_rawDescGZIP(), []int{8}
+}
+
+func (x *ListItemRespone) GetItem() []*Item {
+	if x != nil {
+		return x.Item
+	}
+	return nil
+}
+
+type Item struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ItemName string `protobuf:"bytes,1,opt,name=ItemName,json=itemName,proto3" json:"ItemName,omitempty"`
+	ItemId   int64  `protobuf:"varint,3,opt,name=ItemId,json=itemId,proto3" json:"ItemId,omitempty"`
+}
+
+func (x *Item) Reset() {
+	*x = Item{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protobuf_proto_msgTypes[9]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *Item) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Item) ProtoMessage() {}
+
+func (x *Item) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_proto_msgTypes[9]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Item.ProtoReflect.Descriptor instead.
+func (*Item) Descriptor() ([]byte, []int) {
+	return file_protobuf_proto_rawDescGZIP(), []int{9}
+}
+
+func (x *Item) GetItemName() string {
+	if x != nil {
+		return x.ItemName
+	}
+	return ""
+}
+
+func (x *Item) GetItemId() int64 {
+	if x != nil {
+		return x.ItemId
+	}
+	return 0
+}
+
+type CustomerRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CustomerPhone string `protobuf:"bytes,1,opt,name=CustomerPhone,json=customerPhone,proto3" json:"CustomerPhone,omitempty"`
+}
+
+func (x *CustomerRequest) Reset() {
+	*x = CustomerRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protobuf_proto_msgTypes[10]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CustomerRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CustomerRequest) ProtoMessage() {}
+
+func (x *CustomerRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_proto_msgTypes[10]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CustomerRequest.ProtoReflect.Descriptor instead.
+func (*CustomerRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_proto_rawDescGZIP(), []int{10}
+}
+
+func (x *CustomerRequest) GetCustomerPhone() string {
+	if x != nil {
+		return x.CustomerPhone
+	}
+	return ""
+}
+
+type CustomerRespone struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CustomerId    int64  `protobuf:"varint,1,opt,name=CustomerId,json=customerId,proto3" json:"CustomerId,omitempty"`
+	CustomerName  string `protobuf:"bytes,2,opt,name=CustomerName,json=customerName,proto3" json:"CustomerName,omitempty"`
+	CustomerPhone string `protobuf:"bytes,3,opt,name=CustomerPhone,json=customerPhone,proto3" json:"CustomerPhone,omitempty"`
+}
+
+func (x *CustomerRespone) Reset() {
+	*x = CustomerRespone{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protobuf_proto_msgTypes[11]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *CustomerRespone) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*CustomerRespone) ProtoMessage() {}
+
+func (x *CustomerRespone) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_proto_msgTypes[11]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use CustomerRespone.ProtoReflect.Descriptor instead.
+func (*CustomerRespone) Descriptor() ([]byte, []int) {
+	return file_protobuf_proto_rawDescGZIP(), []int{11}
+}
+
+func (x *CustomerRespone) GetCustomerId() int64 {
+	if x != nil {
+		return x.CustomerId
+	}
+	return 0
+}
+
+func (x *CustomerRespone) GetCustomerName() string {
+	if x != nil {
+		return x.CustomerName
+	}
+	return ""
+}
+
+func (x *CustomerRespone) GetCustomerPhone() string {
+	if x != nil {
+		return x.CustomerPhone
+	}
+	return ""
 }
 
 var File_protobuf_proto protoreflect.FileDescriptor
@@ -541,40 +838,82 @@ var file_protobuf_proto_rawDesc = []byte{
 	0x08, 0x49, 0x74, 0x65, 0x6d, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x08, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x08, 0x69, 0x74, 0x65, 0x6d, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x22, 0x0a, 0x0c, 0x43, 0x75, 0x73,
 	0x74, 0x6f, 0x6d, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x09, 0x20, 0x01, 0x28, 0x09, 0x52,
-	0x0c, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x7f, 0x0a,
-	0x11, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x42, 0x69, 0x6c, 0x6c, 0x52, 0x65, 0x71, 0x75, 0x65,
-	0x73, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x49, 0x74, 0x65, 0x6d, 0x49, 0x64, 0x18, 0x03, 0x20, 0x01,
-	0x28, 0x03, 0x52, 0x06, 0x69, 0x74, 0x65, 0x6d, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x41, 0x6d,
-	0x6f, 0x75, 0x6e, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75,
-	0x6e, 0x74, 0x12, 0x1e, 0x0a, 0x0a, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x49, 0x64,
-	0x18, 0x05, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72,
-	0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08, 0x42, 0x69, 0x6c, 0x6c, 0x44, 0x65, 0x73, 0x63, 0x18, 0x07,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x08, 0x62, 0x69, 0x6c, 0x6c, 0x44, 0x65, 0x73, 0x63, 0x22, 0x2d,
-	0x0a, 0x11, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x42, 0x69, 0x6c, 0x6c, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x49, 0x73, 0x53, 0x61, 0x76, 0x65, 0x64, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x69, 0x73, 0x53, 0x61, 0x76, 0x65, 0x64, 0x32, 0xc9, 0x02,
-	0x0a, 0x19, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x4d, 0x69, 0x64, 0x64, 0x6c, 0x65,
-	0x77, 0x61, 0x72, 0x65, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x5a, 0x0a, 0x0a, 0x55,
-	0x73, 0x65, 0x72, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x12, 0x1b, 0x2e, 0x61, 0x70, 0x69, 0x2e,
-	0x6d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1b, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x65, 0x72,
-	0x63, 0x68, 0x61, 0x6e, 0x74, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x52, 0x65, 0x73, 0x70,
-	0x6f, 0x6e, 0x65, 0x22, 0x12, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x0c, 0x22, 0x0a, 0x2f, 0x76, 0x31,
-	0x2f, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x12, 0x68, 0x0a, 0x0a, 0x53, 0x65, 0x61, 0x72, 0x63,
-	0x68, 0x42, 0x69, 0x6c, 0x6c, 0x12, 0x1f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x65, 0x72, 0x63,
-	0x68, 0x61, 0x6e, 0x74, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x42, 0x69, 0x6c, 0x6c, 0x52,
-	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x65, 0x72,
-	0x63, 0x68, 0x61, 0x6e, 0x74, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x42, 0x69, 0x6c, 0x6c,
-	0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65, 0x22, 0x16, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x10, 0x22,
-	0x0e, 0x2f, 0x76, 0x31, 0x2f, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x42, 0x69, 0x6c, 0x6c, 0x30,
-	0x01, 0x12, 0x66, 0x0a, 0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x42, 0x69, 0x6c, 0x6c, 0x12,
-	0x1f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x2e, 0x43,
-	0x72, 0x65, 0x61, 0x74, 0x65, 0x42, 0x69, 0x6c, 0x6c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
-	0x1a, 0x1f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x2e,
-	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x42, 0x69, 0x6c, 0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
-	0x65, 0x22, 0x16, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x10, 0x22, 0x0e, 0x2f, 0x76, 0x31, 0x2f, 0x43,
-	0x72, 0x65, 0x61, 0x74, 0x65, 0x42, 0x69, 0x6c, 0x6c, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f,
-	0x33,
+	0x0c, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x22, 0x68, 0x0a,
+	0x15, 0x4c, 0x69, 0x73, 0x74, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x42, 0x69, 0x6c, 0x6c, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65, 0x12, 0x4f, 0x0a, 0x12, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68,
+	0x42, 0x69, 0x6c, 0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x1f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e,
+	0x74, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x42, 0x69, 0x6c, 0x6c, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x65, 0x52, 0x12, 0x73, 0x65, 0x61, 0x72, 0x63, 0x68, 0x42, 0x69, 0x6c, 0x6c, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65, 0x73, 0x22, 0x7f, 0x0a, 0x11, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x42, 0x69, 0x6c, 0x6c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x16, 0x0a, 0x06,
+	0x49, 0x74, 0x65, 0x6d, 0x49, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x69, 0x74,
+	0x65, 0x6d, 0x49, 0x64, 0x12, 0x16, 0x0a, 0x06, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x04,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x12, 0x1e, 0x0a, 0x0a,
+	0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x49, 0x64, 0x18, 0x05, 0x20, 0x01, 0x28, 0x03,
+	0x52, 0x0a, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x49, 0x64, 0x12, 0x1a, 0x0a, 0x08,
+	0x42, 0x69, 0x6c, 0x6c, 0x44, 0x65, 0x73, 0x63, 0x18, 0x07, 0x20, 0x01, 0x28, 0x09, 0x52, 0x08,
+	0x62, 0x69, 0x6c, 0x6c, 0x44, 0x65, 0x73, 0x63, 0x22, 0x2d, 0x0a, 0x11, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x42, 0x69, 0x6c, 0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65, 0x12, 0x18, 0x0a,
+	0x07, 0x49, 0x73, 0x53, 0x61, 0x76, 0x65, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07,
+	0x69, 0x73, 0x53, 0x61, 0x76, 0x65, 0x64, 0x22, 0x11, 0x0a, 0x0f, 0x4c, 0x69, 0x73, 0x74, 0x49,
+	0x74, 0x65, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x39, 0x0a, 0x0f, 0x4c, 0x69,
+	0x73, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65, 0x12, 0x26, 0x0a,
+	0x04, 0x69, 0x74, 0x65, 0x6d, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x12, 0x2e, 0x61, 0x70,
+	0x69, 0x2e, 0x6d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x2e, 0x49, 0x74, 0x65, 0x6d, 0x52,
+	0x04, 0x69, 0x74, 0x65, 0x6d, 0x22, 0x3a, 0x0a, 0x04, 0x49, 0x74, 0x65, 0x6d, 0x12, 0x1a, 0x0a,
+	0x08, 0x49, 0x74, 0x65, 0x6d, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x08, 0x69, 0x74, 0x65, 0x6d, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x49, 0x74, 0x65,
+	0x6d, 0x49, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x69, 0x74, 0x65, 0x6d, 0x49,
+	0x64, 0x22, 0x37, 0x0a, 0x0f, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x12, 0x24, 0x0a, 0x0d, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72,
+	0x50, 0x68, 0x6f, 0x6e, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x63, 0x75, 0x73,
+	0x74, 0x6f, 0x6d, 0x65, 0x72, 0x50, 0x68, 0x6f, 0x6e, 0x65, 0x22, 0x7b, 0x0a, 0x0f, 0x43, 0x75,
+	0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65, 0x12, 0x1e, 0x0a,
+	0x0a, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x0a, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x49, 0x64, 0x12, 0x22, 0x0a,
+	0x0c, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x0c, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x4e, 0x61, 0x6d,
+	0x65, 0x12, 0x24, 0x0a, 0x0d, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x50, 0x68, 0x6f,
+	0x6e, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d,
+	0x65, 0x72, 0x50, 0x68, 0x6f, 0x6e, 0x65, 0x32, 0xca, 0x04, 0x0a, 0x19, 0x4d, 0x65, 0x72, 0x63,
+	0x68, 0x61, 0x6e, 0x74, 0x4d, 0x69, 0x64, 0x64, 0x6c, 0x65, 0x77, 0x61, 0x72, 0x65, 0x53, 0x65,
+	0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x66, 0x0a, 0x0a, 0x55, 0x73, 0x65, 0x72, 0x41, 0x75, 0x74,
+	0x68, 0x6f, 0x72, 0x12, 0x1b, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x65, 0x72, 0x63, 0x68, 0x61,
+	0x6e, 0x74, 0x2e, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74,
+	0x1a, 0x1b, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x2e,
+	0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65, 0x22, 0x1e, 0x82,
+	0xd3, 0xe4, 0x93, 0x02, 0x18, 0x22, 0x13, 0x2f, 0x76, 0x31, 0x2f, 0x4d, 0x65, 0x72, 0x63, 0x68,
+	0x61, 0x6e, 0x74, 0x2f, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x3a, 0x01, 0x2a, 0x12, 0x76, 0x0a,
+	0x0a, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x42, 0x69, 0x6c, 0x6c, 0x12, 0x1f, 0x2e, 0x61, 0x70,
+	0x69, 0x2e, 0x6d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x2e, 0x53, 0x65, 0x61, 0x72, 0x63,
+	0x68, 0x42, 0x69, 0x6c, 0x6c, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x23, 0x2e, 0x61,
+	0x70, 0x69, 0x2e, 0x6d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x2e, 0x4c, 0x69, 0x73, 0x74,
+	0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x42, 0x69, 0x6c, 0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e,
+	0x65, 0x22, 0x22, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1c, 0x22, 0x17, 0x2f, 0x76, 0x31, 0x2f, 0x4d,
+	0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x2f, 0x53, 0x65, 0x61, 0x72, 0x63, 0x68, 0x42, 0x69,
+	0x6c, 0x6c, 0x3a, 0x01, 0x2a, 0x12, 0x72, 0x0a, 0x0a, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x42,
+	0x69, 0x6c, 0x6c, 0x12, 0x1f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x65, 0x72, 0x63, 0x68, 0x61,
+	0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x42, 0x69, 0x6c, 0x6c, 0x52, 0x65, 0x71,
+	0x75, 0x65, 0x73, 0x74, 0x1a, 0x1f, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x65, 0x72, 0x63, 0x68,
+	0x61, 0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x42, 0x69, 0x6c, 0x6c, 0x52, 0x65,
+	0x73, 0x70, 0x6f, 0x6e, 0x65, 0x22, 0x22, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1c, 0x22, 0x17, 0x2f,
+	0x76, 0x31, 0x2f, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x2f, 0x43, 0x72, 0x65, 0x61,
+	0x74, 0x65, 0x42, 0x69, 0x6c, 0x6c, 0x3a, 0x01, 0x2a, 0x12, 0x6a, 0x0a, 0x0b, 0x47, 0x65, 0x74,
+	0x4c, 0x69, 0x73, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x12, 0x1d, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d,
+	0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x49, 0x74, 0x65, 0x6d,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x65,
+	0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x52,
+	0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65, 0x22, 0x1d, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x17, 0x12, 0x15,
+	0x2f, 0x76, 0x31, 0x2f, 0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x2f, 0x4c, 0x69, 0x73,
+	0x74, 0x49, 0x74, 0x65, 0x6d, 0x12, 0x6d, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x43, 0x75, 0x73, 0x74,
+	0x6f, 0x6d, 0x65, 0x72, 0x12, 0x1d, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x65, 0x72, 0x63, 0x68,
+	0x61, 0x6e, 0x74, 0x2e, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x1a, 0x1d, 0x2e, 0x61, 0x70, 0x69, 0x2e, 0x6d, 0x65, 0x72, 0x63, 0x68, 0x61,
+	0x6e, 0x74, 0x2e, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x65, 0x22, 0x20, 0x82, 0xd3, 0xe4, 0x93, 0x02, 0x1a, 0x22, 0x15, 0x2f, 0x76, 0x31, 0x2f,
+	0x4d, 0x65, 0x72, 0x63, 0x68, 0x61, 0x6e, 0x74, 0x2f, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65,
+	0x72, 0x3a, 0x01, 0x2a, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -589,27 +928,39 @@ func file_protobuf_proto_rawDescGZIP() []byte {
 	return file_protobuf_proto_rawDescData
 }
 
-var file_protobuf_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_protobuf_proto_msgTypes = make([]protoimpl.MessageInfo, 12)
 var file_protobuf_proto_goTypes = []interface{}{
-	(*AuthorRequest)(nil),     // 0: api.merchant.AuthorRequest
-	(*AuthorRespone)(nil),     // 1: api.merchant.AuthorRespone
-	(*SearchBillRequest)(nil), // 2: api.merchant.SearchBillRequest
-	(*SearchBillRespone)(nil), // 3: api.merchant.SearchBillRespone
-	(*CreateBillRequest)(nil), // 4: api.merchant.CreateBillRequest
-	(*CreateBillRespone)(nil), // 5: api.merchant.CreateBillRespone
+	(*AuthorRequest)(nil),         // 0: api.merchant.AuthorRequest
+	(*AuthorRespone)(nil),         // 1: api.merchant.AuthorRespone
+	(*SearchBillRequest)(nil),     // 2: api.merchant.SearchBillRequest
+	(*SearchBillRespone)(nil),     // 3: api.merchant.SearchBillRespone
+	(*ListSearchBillRespone)(nil), // 4: api.merchant.ListSearchBillRespone
+	(*CreateBillRequest)(nil),     // 5: api.merchant.CreateBillRequest
+	(*CreateBillRespone)(nil),     // 6: api.merchant.CreateBillRespone
+	(*ListItemRequest)(nil),       // 7: api.merchant.ListItemRequest
+	(*ListItemRespone)(nil),       // 8: api.merchant.ListItemRespone
+	(*Item)(nil),                  // 9: api.merchant.Item
+	(*CustomerRequest)(nil),       // 10: api.merchant.CustomerRequest
+	(*CustomerRespone)(nil),       // 11: api.merchant.CustomerRespone
 }
 var file_protobuf_proto_depIdxs = []int32{
-	0, // 0: api.merchant.MerchantMiddlewareService.UserAuthor:input_type -> api.merchant.AuthorRequest
-	2, // 1: api.merchant.MerchantMiddlewareService.SearchBill:input_type -> api.merchant.SearchBillRequest
-	4, // 2: api.merchant.MerchantMiddlewareService.CreateBill:input_type -> api.merchant.CreateBillRequest
-	1, // 3: api.merchant.MerchantMiddlewareService.UserAuthor:output_type -> api.merchant.AuthorRespone
-	3, // 4: api.merchant.MerchantMiddlewareService.SearchBill:output_type -> api.merchant.SearchBillRespone
-	5, // 5: api.merchant.MerchantMiddlewareService.CreateBill:output_type -> api.merchant.CreateBillRespone
-	3, // [3:6] is the sub-list for method output_type
-	0, // [0:3] is the sub-list for method input_type
-	0, // [0:0] is the sub-list for extension type_name
-	0, // [0:0] is the sub-list for extension extendee
-	0, // [0:0] is the sub-list for field type_name
+	3,  // 0: api.merchant.ListSearchBillRespone.SearchBillRespones:type_name -> api.merchant.SearchBillRespone
+	9,  // 1: api.merchant.ListItemRespone.item:type_name -> api.merchant.Item
+	0,  // 2: api.merchant.MerchantMiddlewareService.UserAuthor:input_type -> api.merchant.AuthorRequest
+	2,  // 3: api.merchant.MerchantMiddlewareService.SearchBill:input_type -> api.merchant.SearchBillRequest
+	5,  // 4: api.merchant.MerchantMiddlewareService.CreateBill:input_type -> api.merchant.CreateBillRequest
+	7,  // 5: api.merchant.MerchantMiddlewareService.GetListItem:input_type -> api.merchant.ListItemRequest
+	10, // 6: api.merchant.MerchantMiddlewareService.GetCustomer:input_type -> api.merchant.CustomerRequest
+	1,  // 7: api.merchant.MerchantMiddlewareService.UserAuthor:output_type -> api.merchant.AuthorRespone
+	4,  // 8: api.merchant.MerchantMiddlewareService.SearchBill:output_type -> api.merchant.ListSearchBillRespone
+	6,  // 9: api.merchant.MerchantMiddlewareService.CreateBill:output_type -> api.merchant.CreateBillRespone
+	8,  // 10: api.merchant.MerchantMiddlewareService.GetListItem:output_type -> api.merchant.ListItemRespone
+	11, // 11: api.merchant.MerchantMiddlewareService.GetCustomer:output_type -> api.merchant.CustomerRespone
+	7,  // [7:12] is the sub-list for method output_type
+	2,  // [2:7] is the sub-list for method input_type
+	2,  // [2:2] is the sub-list for extension type_name
+	2,  // [2:2] is the sub-list for extension extendee
+	0,  // [0:2] is the sub-list for field type_name
 }
 
 func init() { file_protobuf_proto_init() }
@@ -667,7 +1018,7 @@ func file_protobuf_proto_init() {
 			}
 		}
 		file_protobuf_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreateBillRequest); i {
+			switch v := v.(*ListSearchBillRespone); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -679,7 +1030,79 @@ func file_protobuf_proto_init() {
 			}
 		}
 		file_protobuf_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CreateBillRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protobuf_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateBillRespone); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protobuf_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListItemRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protobuf_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListItemRespone); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protobuf_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*Item); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protobuf_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CustomerRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protobuf_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CustomerRespone); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -697,7 +1120,7 @@ func file_protobuf_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_protobuf_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   6,
+			NumMessages:   12,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -724,8 +1147,10 @@ const _ = grpc.SupportPackageIsVersion6
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type MerchantMiddlewareServiceClient interface {
 	UserAuthor(ctx context.Context, in *AuthorRequest, opts ...grpc.CallOption) (*AuthorRespone, error)
-	SearchBill(ctx context.Context, in *SearchBillRequest, opts ...grpc.CallOption) (MerchantMiddlewareService_SearchBillClient, error)
+	SearchBill(ctx context.Context, in *SearchBillRequest, opts ...grpc.CallOption) (*ListSearchBillRespone, error)
 	CreateBill(ctx context.Context, in *CreateBillRequest, opts ...grpc.CallOption) (*CreateBillRespone, error)
+	GetListItem(ctx context.Context, in *ListItemRequest, opts ...grpc.CallOption) (*ListItemRespone, error)
+	GetCustomer(ctx context.Context, in *CustomerRequest, opts ...grpc.CallOption) (*CustomerRespone, error)
 }
 
 type merchantMiddlewareServiceClient struct {
@@ -745,36 +1170,13 @@ func (c *merchantMiddlewareServiceClient) UserAuthor(ctx context.Context, in *Au
 	return out, nil
 }
 
-func (c *merchantMiddlewareServiceClient) SearchBill(ctx context.Context, in *SearchBillRequest, opts ...grpc.CallOption) (MerchantMiddlewareService_SearchBillClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_MerchantMiddlewareService_serviceDesc.Streams[0], "/api.merchant.MerchantMiddlewareService/SearchBill", opts...)
+func (c *merchantMiddlewareServiceClient) SearchBill(ctx context.Context, in *SearchBillRequest, opts ...grpc.CallOption) (*ListSearchBillRespone, error) {
+	out := new(ListSearchBillRespone)
+	err := c.cc.Invoke(ctx, "/api.merchant.MerchantMiddlewareService/SearchBill", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &merchantMiddlewareServiceSearchBillClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type MerchantMiddlewareService_SearchBillClient interface {
-	Recv() (*SearchBillRespone, error)
-	grpc.ClientStream
-}
-
-type merchantMiddlewareServiceSearchBillClient struct {
-	grpc.ClientStream
-}
-
-func (x *merchantMiddlewareServiceSearchBillClient) Recv() (*SearchBillRespone, error) {
-	m := new(SearchBillRespone)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
+	return out, nil
 }
 
 func (c *merchantMiddlewareServiceClient) CreateBill(ctx context.Context, in *CreateBillRequest, opts ...grpc.CallOption) (*CreateBillRespone, error) {
@@ -786,11 +1188,31 @@ func (c *merchantMiddlewareServiceClient) CreateBill(ctx context.Context, in *Cr
 	return out, nil
 }
 
+func (c *merchantMiddlewareServiceClient) GetListItem(ctx context.Context, in *ListItemRequest, opts ...grpc.CallOption) (*ListItemRespone, error) {
+	out := new(ListItemRespone)
+	err := c.cc.Invoke(ctx, "/api.merchant.MerchantMiddlewareService/GetListItem", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *merchantMiddlewareServiceClient) GetCustomer(ctx context.Context, in *CustomerRequest, opts ...grpc.CallOption) (*CustomerRespone, error) {
+	out := new(CustomerRespone)
+	err := c.cc.Invoke(ctx, "/api.merchant.MerchantMiddlewareService/GetCustomer", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MerchantMiddlewareServiceServer is the server API for MerchantMiddlewareService service.
 type MerchantMiddlewareServiceServer interface {
 	UserAuthor(context.Context, *AuthorRequest) (*AuthorRespone, error)
-	SearchBill(*SearchBillRequest, MerchantMiddlewareService_SearchBillServer) error
+	SearchBill(context.Context, *SearchBillRequest) (*ListSearchBillRespone, error)
 	CreateBill(context.Context, *CreateBillRequest) (*CreateBillRespone, error)
+	GetListItem(context.Context, *ListItemRequest) (*ListItemRespone, error)
+	GetCustomer(context.Context, *CustomerRequest) (*CustomerRespone, error)
 }
 
 // UnimplementedMerchantMiddlewareServiceServer can be embedded to have forward compatible implementations.
@@ -800,11 +1222,17 @@ type UnimplementedMerchantMiddlewareServiceServer struct {
 func (*UnimplementedMerchantMiddlewareServiceServer) UserAuthor(context.Context, *AuthorRequest) (*AuthorRespone, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UserAuthor not implemented")
 }
-func (*UnimplementedMerchantMiddlewareServiceServer) SearchBill(*SearchBillRequest, MerchantMiddlewareService_SearchBillServer) error {
-	return status.Errorf(codes.Unimplemented, "method SearchBill not implemented")
+func (*UnimplementedMerchantMiddlewareServiceServer) SearchBill(context.Context, *SearchBillRequest) (*ListSearchBillRespone, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchBill not implemented")
 }
 func (*UnimplementedMerchantMiddlewareServiceServer) CreateBill(context.Context, *CreateBillRequest) (*CreateBillRespone, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateBill not implemented")
+}
+func (*UnimplementedMerchantMiddlewareServiceServer) GetListItem(context.Context, *ListItemRequest) (*ListItemRespone, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetListItem not implemented")
+}
+func (*UnimplementedMerchantMiddlewareServiceServer) GetCustomer(context.Context, *CustomerRequest) (*CustomerRespone, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCustomer not implemented")
 }
 
 func RegisterMerchantMiddlewareServiceServer(s *grpc.Server, srv MerchantMiddlewareServiceServer) {
@@ -829,25 +1257,22 @@ func _MerchantMiddlewareService_UserAuthor_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
-func _MerchantMiddlewareService_SearchBill_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(SearchBillRequest)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+func _MerchantMiddlewareService_SearchBill_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(SearchBillRequest)
+	if err := dec(in); err != nil {
+		return nil, err
 	}
-	return srv.(MerchantMiddlewareServiceServer).SearchBill(m, &merchantMiddlewareServiceSearchBillServer{stream})
-}
-
-type MerchantMiddlewareService_SearchBillServer interface {
-	Send(*SearchBillRespone) error
-	grpc.ServerStream
-}
-
-type merchantMiddlewareServiceSearchBillServer struct {
-	grpc.ServerStream
-}
-
-func (x *merchantMiddlewareServiceSearchBillServer) Send(m *SearchBillRespone) error {
-	return x.ServerStream.SendMsg(m)
+	if interceptor == nil {
+		return srv.(MerchantMiddlewareServiceServer).SearchBill(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.merchant.MerchantMiddlewareService/SearchBill",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MerchantMiddlewareServiceServer).SearchBill(ctx, req.(*SearchBillRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _MerchantMiddlewareService_CreateBill_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -868,6 +1293,42 @@ func _MerchantMiddlewareService_CreateBill_Handler(srv interface{}, ctx context.
 	return interceptor(ctx, in, info, handler)
 }
 
+func _MerchantMiddlewareService_GetListItem_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ListItemRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MerchantMiddlewareServiceServer).GetListItem(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.merchant.MerchantMiddlewareService/GetListItem",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MerchantMiddlewareServiceServer).GetListItem(ctx, req.(*ListItemRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _MerchantMiddlewareService_GetCustomer_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CustomerRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(MerchantMiddlewareServiceServer).GetCustomer(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/api.merchant.MerchantMiddlewareService/GetCustomer",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(MerchantMiddlewareServiceServer).GetCustomer(ctx, req.(*CustomerRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _MerchantMiddlewareService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "api.merchant.MerchantMiddlewareService",
 	HandlerType: (*MerchantMiddlewareServiceServer)(nil),
@@ -877,16 +1338,22 @@ var _MerchantMiddlewareService_serviceDesc = grpc.ServiceDesc{
 			Handler:    _MerchantMiddlewareService_UserAuthor_Handler,
 		},
 		{
+			MethodName: "SearchBill",
+			Handler:    _MerchantMiddlewareService_SearchBill_Handler,
+		},
+		{
 			MethodName: "CreateBill",
 			Handler:    _MerchantMiddlewareService_CreateBill_Handler,
 		},
-	},
-	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "SearchBill",
-			Handler:       _MerchantMiddlewareService_SearchBill_Handler,
-			ServerStreams: true,
+			MethodName: "GetListItem",
+			Handler:    _MerchantMiddlewareService_GetListItem_Handler,
+		},
+		{
+			MethodName: "GetCustomer",
+			Handler:    _MerchantMiddlewareService_GetCustomer_Handler,
 		},
 	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "protobuf.proto",
 }

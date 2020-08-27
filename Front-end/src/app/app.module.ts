@@ -13,7 +13,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog' ;
-import { Action } from 'rxjs/internal/scheduler/Action';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
@@ -36,6 +35,8 @@ import { FormsModule } from '@angular/forms';
   providers: [
     SignInComponent
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [ModalComponent]
+
 })
 export class AppModule { }

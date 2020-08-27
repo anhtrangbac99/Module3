@@ -16,6 +16,7 @@ import {Headers} from '@angular/http'
 export class SignInComponent implements OnInit {
   public username :any
   public password : any
+  public message = " "
   
   constructor (private http: Http){
     let username: any;
@@ -25,14 +26,6 @@ export class SignInComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  // createAuthorizationHeader(headers: RequestOptionsArgs["headers"]) {
-  //   headers.append('Content-Type', 'application/json');
-  //   headers.append('Accept', 'application/json');
-  //   headers.append('Access-Control-Allow-Origin', 'http://localhost:1234/SignIn');
-  //   headers.append('Access-Control-Allow-Credentials', 'true');
-  //   headers.append('Authorization', 'Basic ' +
-  //     btoa('username:password')); 
-  // }
 
   SendLoginForm(){
     let LoginForm = {
@@ -43,7 +36,19 @@ export class SignInComponent implements OnInit {
     console.log(LoginForm)
     // this.http.post(`${environment.serverUrl}`,LoginForm,new RequestOptions({headers: headers})).toPromise()
 
-    APIService.POST(`${environment.serverUrl}/v1/Author`,LoginForm)
+    APIService.POST(`${environment.serverUrl}/v1/Merchant/Author`,LoginForm)
+    .then(response => response.json())
+    .then(data => {
+      if (data['IsExisted'] == 1){
+        if (data['User_Id'] != -1){
+          if (data['Authorized']==1){
+            window.location.href = '/searchBill'
+            return
+          }
+        }
+      }
+      this.message = "Username or password is incorrect"
+    })
   }
 
 }

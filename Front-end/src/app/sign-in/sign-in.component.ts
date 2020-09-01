@@ -19,36 +19,45 @@ export class SignInComponent implements OnInit {
   public message = " "
   
   constructor (private http: Http){
-    let username: any;
-    let password: any;
   }
 
   ngOnInit(): void {
+    let UserToken = localStorage.getItem('UserToken')
+    if (UserToken){
+      APIService.GET(`${environment.serverUrl}/v1/Merchant/UserToken/` + UserToken)
+      .then (respone => respone.json())
+      .then (data => {
+        console.log(data)
+        if (data['IsExisted'] == 1) {
+          window.location.href = '/searchBill'
+        }
+      })
+    }
   }
 
-
   SendLoginForm(){
+
     let LoginForm = {
       Username : this.username, 
       Password : this.password,
     }
 
-    console.log(LoginForm)
-    // this.http.post(`${environment.serverUrl}`,LoginForm,new RequestOptions({headers: headers})).toPromise()
+    // console.log(LoginForm)
 
     APIService.POST(`${environment.serverUrl}/v1/Merchant/Author`,LoginForm)
-    .then(response => response.json())
+    .then(response => 
+      response.json()
+    )
     .then(data => {
+      console.log(data)
       if (data['IsExisted'] == 1){
-        if (data['User_Id'] != -1){
-          if (data['Authorized']==1){
-            window.location.href = '/searchBill'
-            return
-          }
-        }
+        //if (data['Authorized']==1){
+          localStorage.setItem('UserToken', data['User_Id'])
+          window.location.href = '/searchBill'
+          return
+        //}
       }
       this.message = "Username or password is incorrect"
     })
   }
-
 }

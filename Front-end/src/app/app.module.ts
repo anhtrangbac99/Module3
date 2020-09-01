@@ -14,6 +14,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog' ;
 import { FormsModule } from '@angular/forms';
+import { ModalPaymentComponent } from './modal-payment/modal-payment.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FormsModule } from '@angular/forms';
     SignInComponent,
     SearchBillComponent,
     HeaderComponent,
-    ModalComponent
+    ModalComponent,
+    ModalPaymentComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,10 @@ import { FormsModule } from '@angular/forms';
     SignInComponent
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ModalComponent]
+  entryComponents: [
+    ModalComponent,
+    ModalPaymentComponent
+  ]
 
 })
 export class AppModule { }

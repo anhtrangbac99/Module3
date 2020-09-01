@@ -11,7 +11,7 @@
     "application/json"
   ],
   "paths": {
-    "/v1/Author": {
+    "/v1/Merchant/Author": {
       "post": {
         "operationId": "MerchantMiddlewareService_UserAuthor",
         "responses": {
@@ -28,12 +28,224 @@
             }
           }
         },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/merchantAuthorRequest"
+            }
+          }
+        ],
         "tags": [
           "MerchantMiddlewareService"
         ]
       }
     },
-    "/v1/CreateBill": {
+    "/v1/Merchant/BillId/{BillId}": {
+      "get": {
+        "operationId": "MerchantMiddlewareService_BillDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/merchantBillDetailRespone"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "BillId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          }
+        ],
+        "tags": [
+          "MerchantMiddlewareService"
+        ]
+      }
+    },
+    "/v1/Merchant/Customer/{CustomerPhone}": {
+      "get": {
+        "operationId": "MerchantMiddlewareService_GetCustomer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/merchantCustomerRespone"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "CustomerPhone",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MerchantMiddlewareService"
+        ]
+      }
+    },
+    "/v1/Merchant/ListItem": {
+      "get": {
+        "operationId": "MerchantMiddlewareService_ListItem",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/merchantListItemRespone"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "tags": [
+          "MerchantMiddlewareService"
+        ]
+      }
+    },
+    "/v1/Merchant/Search/{UserToken}/BillId/{BillId}/BillStatus/{BillStatus}/Amount/{Amount}/ItemId/{ItemId}/CustomerId/{CustomerId}/CustomerPhone/{CustomerPhone}/CustomerName/{CustomerName}/ItemName/{ItemName}/BillDesc/{BillDesc}": {
+      "get": {
+        "operationId": "MerchantMiddlewareService_Search",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/merchantSearchRespone"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "UserToken",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "BillId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "BillStatus",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "Amount",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "ItemId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "CustomerId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "int64"
+          },
+          {
+            "name": "CustomerPhone",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "CustomerName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ItemName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "BillDesc",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MerchantMiddlewareService"
+        ]
+      }
+    },
+    "/v1/Merchant/UserToken/{UserToken}": {
+      "get": {
+        "operationId": "MerchantMiddlewareService_CheckUserToken",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/merchantUserTokenRespone"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "UserToken",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MerchantMiddlewareService"
+        ]
+      }
+    },
+    "/v1/Merchant/{UserToken}/CreateBill": {
       "post": {
         "operationId": "MerchantMiddlewareService_CreateBill",
         "responses": {
@@ -50,37 +262,22 @@
             }
           }
         },
-        "tags": [
-          "MerchantMiddlewareService"
-        ]
-      }
-    },
-    "/v1/SearchBill": {
-      "post": {
-        "operationId": "MerchantMiddlewareService_SearchBill",
-        "responses": {
-          "200": {
-            "description": "A successful response.(streaming responses)",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "result": {
-                  "$ref": "#/definitions/merchantSearchBillRespone"
-                },
-                "error": {
-                  "$ref": "#/definitions/runtimeStreamError"
-                }
-              },
-              "title": "Stream result of merchantSearchBillRespone"
-            }
+        "parameters": [
+          {
+            "name": "UserToken",
+            "in": "path",
+            "required": true,
+            "type": "string"
           },
-          "default": {
-            "description": "An unexpected error response",
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/runtimeError"
+              "$ref": "#/definitions/merchantCreateBillRequest"
             }
           }
-        },
+        ],
         "tags": [
           "MerchantMiddlewareService"
         ]
@@ -88,6 +285,17 @@
     }
   },
   "definitions": {
+    "merchantAuthorRequest": {
+      "type": "object",
+      "properties": {
+        "Username": {
+          "type": "string"
+        },
+        "Password": {
+          "type": "string"
+        }
+      }
+    },
     "merchantAuthorRespone": {
       "type": "object",
       "properties": {
@@ -96,12 +304,54 @@
           "format": "int64"
         },
         "User_Id": {
-          "type": "string",
-          "format": "int64"
+          "type": "string"
         },
         "Authorized": {
           "type": "string",
           "format": "int64"
+        }
+      }
+    },
+    "merchantBillDetailRespone": {
+      "type": "object",
+      "properties": {
+        "ItemName": {
+          "type": "string"
+        },
+        "Amount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "Price": {
+          "type": "string",
+          "format": "int64"
+        },
+        "Total": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "merchantCreateBillRequest": {
+      "type": "object",
+      "properties": {
+        "UserToken": {
+          "type": "string"
+        },
+        "ItemId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "Amount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "CustomerId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "BillDesc": {
+          "type": "string"
         }
       }
     },
@@ -111,6 +361,44 @@
         "IsSaved": {
           "type": "string",
           "format": "int64"
+        }
+      }
+    },
+    "merchantCustomerRespone": {
+      "type": "object",
+      "properties": {
+        "CustomerId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "CustomerName": {
+          "type": "string"
+        },
+        "CustomerPhone": {
+          "type": "string"
+        }
+      }
+    },
+    "merchantItem": {
+      "type": "object",
+      "properties": {
+        "ItemName": {
+          "type": "string"
+        },
+        "ItemId": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "merchantListItemRespone": {
+      "type": "object",
+      "properties": {
+        "item": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/merchantItem"
+          }
         }
       }
     },
@@ -151,6 +439,30 @@
         }
       }
     },
+    "merchantSearchRespone": {
+      "type": "object",
+      "properties": {
+        "SearchRespones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/merchantSearchBillRespone"
+          }
+        }
+      }
+    },
+    "merchantUserTokenRespone": {
+      "type": "object",
+      "properties": {
+        "IsExisted": {
+          "type": "string",
+          "format": "int64"
+        },
+        "Authorized": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
     "protobufAny": {
       "type": "object",
       "properties": {
@@ -174,31 +486,6 @@
           "format": "int32"
         },
         "message": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/protobufAny"
-          }
-        }
-      }
-    },
-    "runtimeStreamError": {
-      "type": "object",
-      "properties": {
-        "grpc_code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "http_code": {
-          "type": "integer",
-          "format": "int32"
-        },
-        "message": {
-          "type": "string"
-        },
-        "http_status": {
           "type": "string"
         },
         "details": {

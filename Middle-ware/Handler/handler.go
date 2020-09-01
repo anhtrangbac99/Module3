@@ -85,6 +85,7 @@ func (sv *merchantHandler) UserAuthor(ctx context.Context, request *pb.AuthorReq
 	//respone,err := json.Marshal(&result)
 
 	//writer.Write(respone)
+	fmt.Println(result.GetUser_Id())
 	respone := pb.AuthorRespone{IsExisted:result.GetIsExisted(),User_Id:result.GetUser_Id(),Authorized:result.GetAuthorized()}
 	return &respone,nil
 }
@@ -113,48 +114,12 @@ func (sv *merchantHandler) CreateBill(ctx context.Context, request *pb.CreateBil
 	return &respone,nil
 }
 
-func  (sv *merchantHandler) SearchBill(ctx context.Context,request *pb.SearchBillRequest) (*pb.ListSearchBillRespone,error){
-
-	glog.Info("SearchBill request: ", request)
-
-	reqToCore := pbManageBill.SearchBillRequest{}
-
-	if err:=copier.Copy(&reqToCore,request);err != nil{
-		log.Fatal(err)
-	}
-
-	client := sv.MerchantManageBillCoreService
-
-	stream,_ := client.SearchBill(context.Background(),&reqToCore)
-	
-	listRespone:= []*pb.SearchBillRespone{}
-	for {
-		result,err := stream.Recv()
-		respone := pb.SearchBillRespone{}
-		if err == io.EOF {
-			break
-		}
-
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		if err := copier.Copy(&respone,result);err != nil {
-			log.Fatal(err)
-		}
-		listRespone = append(listRespone,&respone)
-		fmt.Println(respone)
-	}
-
-	return &pb.ListSearchBillRespone{SearchBillRespones:listRespone},nil
-}
-
-func (sv *merchantHandler) GetListItem(ctx context.Context,request *pb.ListItemRequest) (*pb.ListItemRespone,error){
+func (sv *merchantHandler) ListItem(ctx context.Context,request *pb.ListItemRequest) (*pb.ListItemRespone,error){
 	glog.Info("Get List Item request: " ,request)
 
 	client := sv.MerchantManageSupportCoreService
 
-	stream,_ := client.GetListItem(context.Background(),&pbManageSupport.ListItemRequest{})
+	stream,_ := client.ListItem(context.Background(),&pbManageSupport.ListItemRequest{})
 
 	ListItem := []*pb.Item{}
 	for {
@@ -182,6 +147,7 @@ func (sv *merchantHandler) GetListItem(ctx context.Context,request *pb.ListItemR
 func (sv *merchantHandler) GetCustomer(ctx context.Context,request *pb.CustomerRequest) (*pb.CustomerRespone,error){
 	glog.Info("Get Cusomter request",request)
 
+	
 	reqToCore := pbManageSupport.CustomerRequest{}
 
 	if err := copier.Copy(&reqToCore,request);err!=nil{
@@ -199,4 +165,97 @@ func (sv *merchantHandler) GetCustomer(ctx context.Context,request *pb.CustomerR
 	}
 	fmt.Println()
 	return &respone,nil
+}
+
+func (sv *merchantHandler) Search(ctx context.Context,request *pb.SearchRequest) (*pb.SearchRespone,error){
+	glog.Info("Search request",request)
+
+
+	reqToCore := pbManageBill.SearchBillRequest{}
+
+	if err:=copier.Copy(&reqToCore,request);err != nil{
+		log.Fatal(err)
+	}
+
+	//glog.Info("Request to core",reqToCore.GetBillId())
+	if err:=copier.Copy(&reqToCore,request);err != nil{
+		log.Fatal(err)
+	}
+
+	client := sv.MerchantManageBillCoreService
+
+	stream,_ := client.SearchBill(context.Background(),&reqToCore)
+	
+	listRespone:= []*pb.SearchBillRespone{}
+	for {
+		result,err := stream.Recv()
+		respone := pb.SearchBillRespone{}
+		if err == io.EOF {
+			break
+		}
+
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		if err := copier.Copy(&respone,result);err != nil {
+			log.Fatal(err)
+		}
+		listRespone = append(listRespone,&respone)
+		fmt.Println(respone)
+	}
+
+	return &pb.SearchRespone{SearchRespones:listRespone},nil
+
+	//return &pb.SearchRespone{},nil
+}
+
+func (sv *merchantHandler) CheckUserToken(ctx context.Context, request *pb.UserTokenRequest) (*pb.UserTokenRespone,error){
+	glog.Info("Check Token request",request)
+
+	reqToCore := pbManageSupport.UserTokenRequest{}
+
+	if err:=copier.Copy(&reqToCore,request);err != nil{
+		log.Fatal(err)
+	}
+
+	result,err := sv.MerchantManageSupportCoreService.CheckUserToken(context.Background(),&reqToCore)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	respone := pb.UserTokenRespone{}
+
+	if err:=copier.Copy(&respone,result);err != nil{
+		log.Fatal(err)
+	}
+
+	return &respone,nil
+}
+
+func (sv *merchantHandler) BillDetail(ctx context.Context,request *pb.BillDetailRequest) (*pb.BillDetailRespone,error){
+	glog.Info("Bill Detail request",request)
+
+	reqToCore := pbManageSupport.BillDetailRequest{}
+
+	if err:=copier.Copy(&reqToCore,request);err != nil{
+		log.Fatal(err)
+	}
+
+	result,err := sv.MerchantManageSupportCoreService.BillDetail(context.Background(),&reqToCore)
+
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	respone := pb.BillDetailRespone{}
+
+	if err:=copier.Copy(&respone,result);err != nil{
+		log.Fatal(err)
+	}
+
+	return &respone,nil
+
+
 }

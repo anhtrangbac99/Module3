@@ -3,8 +3,10 @@ syntax = "proto3";
 package protobuf;
 
 service ManageSupport {
-    rpc GetListItem(ListItemRequest) returns (stream ListItemRespone){}
+    rpc ListItem(ListItemRequest) returns (stream ListItemRespone){}
     rpc GetCustomer(CustomerRequest) returns (CustomerRespone){}
+    rpc CheckUserToken(UserTokenRequest) returns (UserTokenRespone) {}
+    rpc BillDetail(BillDetailRequest) returns (BillDetailRespone) {}
 }
 
 message ListItemRequest{
@@ -24,4 +26,24 @@ message CustomerRespone{
     int64 CustomerId = 1;
     string CustomerName = 2;
     string CustomerPhone = 3;
+}
+
+message UserTokenRequest{
+    string UserToken = 1;
+}
+
+message UserTokenRespone {
+    int64 IsExisted = 1;
+    int64 Authorized = 2;
+}
+
+message BillDetailRequest{
+    int64 BillId = 1;
+}
+
+message BillDetailRespone{
+    string ItemName = 1;
+    int64 Amount = 2;
+    int64 Price = 3;
+    int64 Total = 4;
 }

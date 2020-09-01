@@ -15,6 +15,8 @@ import (
 	"context"
 	"github.com/golang/glog"
 	pb "google.golang.org/grpc/examples/App/Proto/ManageBill"
+	"github.com/go-redis/redis/v8"  
+
 
 )
 
@@ -30,6 +32,9 @@ type ElasticDocs struct {
 	Bill_Desc string
 }
 
+type Authorized struct {
+	Authorized int
+}
 func AccessDB() (*sql.DB){
 	dbDriver := "mysql"
  
@@ -131,6 +136,25 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 	esclient2,err:= GetESClient()
 	LogError(err)
 
+	redisClient := redis.NewClient(&redis.Options{
+		Addr: "127.0.0.1:6379",
+		Password: "",
+		DB: 0,
+	})
+	userId,_ := redisClient.Get(context.Background(),request.GetUserToken()).Result()
+
+	DB := AccessDB()
+
+	user,err := DB.Query(`SELECT Authorized FROM User WHERE User_Id="` + userId + `";`)
+
+	var Authorized Authorized
+	for user.Next(){
+		err = user.Scan(&Authorized.Authorized)
+
+		if err !=nil {
+			log.Fatal(err)
+		}
+	}
 	bq := elastic1.NewBoolQuery()
 
 	if request.GetBillId() != 0{
@@ -149,23 +173,27 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 		bq.Must(elastic1.NewMatchQuery("Amount",request.GetAmount()))
 	}
 
-	if request.GetCustomerId() != 0{
+	if Authorized.Authorized==1 && request.GetCustomerId() != 0{
 		bq.Must(elastic1.NewMatchQuery("Customer_Id",request.GetCustomerId()))
 	}
 
-	if request.GetCustomerPhone() != ""{
+	if Authorized.Authorized == 2 {
+		bq.Must(elastic1.NewMatchQuery("Customer_Id",userId))
+	}
+
+	if request.GetCustomerPhone() != "" && request.GetCustomerPhone() != " " {
 		bq.Must(elastic1.NewMatchQuery("Customer_Phone",request.GetCustomerPhone()))
 	}
 
-	if request.GetBillDesc() != ""{
+	if request.GetBillDesc() != "" && request.GetBillDesc() != " "{
 		bq.Must(elastic1.NewMatchQuery("Bill_Desc",request.GetBillDesc()))
 	}
 
-	if request.GetItemName() != ""{
+	if request.GetItemName() != ""&&request.GetItemName() != " "{
 		bq.Must(elastic1.NewMatchQuery("Item_Name",request.GetItemName()))
 	}
 
-	if request.GetCustomerName() != ""{
+	if request.GetCustomerName() != "" &&request.GetCustomerName() != " "{
 		bq.Must(elastic1.NewMatchQuery("Customer_Name",request.GetCustomerName()))
 	}
 
@@ -190,7 +218,6 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 		billsEs = append(billsEs,bill)
 	}
 
-	DB := AccessDB()
 	Wg := sync.WaitGroup{}
 	var mux sync.Mutex
 	if len(billsEs) == 0{
@@ -244,7 +271,7 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 			Query = Query + ` b.Amount="` +strconv.Itoa(int(request.GetAmount()))+`"`
 		}
 
-		if request.GetCustomerId() != 0{
+		if Authorized.Authorized==1 && request.GetCustomerId() != 0 {
 			if isFirst{
 				isFirst = false
 				Query = Query + `WHERE`
@@ -255,7 +282,17 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 			Query = Query + ` b.Customer_Id="` + strconv.Itoa(int(request.GetCustomerId()))+`"`
 		}
 
-		if request.GetCustomerPhone() != ""{
+		if Authorized.Authorized==2 {
+			if isFirst{
+				isFirst = false
+				Query = Query + `WHERE`
+
+			} else {
+				Query = Query + ` AND`
+			}
+			Query = Query + ` b.Customer_Id="` + userId +`"`
+		}
+		if request.GetCustomerPhone() != "" && request.GetCustomerPhone() != " "{
 			if isFirst{
 				isFirst = false
 				Query = Query + `WHERE`
@@ -266,7 +303,7 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 			Query = Query + ` c.Customer_Phone="` + request.GetCustomerPhone() + `"`
 		}
 
-		if request.GetBillDesc() != ""{
+		if request.GetBillDesc() != "" && request.GetBillDesc() != " "{
 			if isFirst{
 				isFirst = false
 				Query = Query + `WHERE`
@@ -274,10 +311,10 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 			} else {
 				Query = Query + ` AND`
 			}
-			Query = Query + ` b.Bill_Desc="` + request.GetBillDesc()+ `"`
+			Query = Query + ` b.Bill_Desc LIKE '%` + request.GetBillDesc()+ `%'`
 		}
 
-		if request.GetItemName() != ""{
+		if request.GetItemName() != "" && request.GetItemName() != " "{
 			if isFirst{
 				isFirst = false
 				Query = Query + `WHERE`
@@ -285,10 +322,10 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 			} else {
 				Query = Query + ` AND`
 			}
-			Query = Query + ` I.Item_Name="` + request.GetItemName()+ `"`
+			Query = Query + ` I.Item_Name LIKE '%` + request.GetItemName()+ `'`
 		}
 
-		if request.GetCustomerName() != ""{
+		if request.GetCustomerName() != "" && request.GetCustomerName() != " "{
 			if isFirst{
 				isFirst = false
 				Query = Query + `WHERE`
@@ -296,7 +333,7 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 			} else {
 				Query = Query + ` AND`
 			}
-			Query = Query + ` c.Customer_Name="` + request.GetCustomerName()+ `"`
+			Query = Query + ` c.Customer_Name LIKE '%` + request.GetCustomerName()+ `%'`
 		}
 
 		Query = Query + `;`

@@ -23,6 +23,7 @@ export class ModalComponent implements OnInit {
   constructor(public dialogRef: MatDialogRef<ModalComponent>) { }
 
   ngOnInit(): void {
+    APIService.CheckToken('/')
     APIService.GET(`${environment.serverUrl}/v1/Merchant/ListItem`)
     .then (respone => respone.json())
     .then (respone => respone['item'])
@@ -35,6 +36,8 @@ export class ModalComponent implements OnInit {
   }
 
   addBill():void {
+    APIService.CheckToken('/')
+
     /*************** Add Bill Start Here ***************/
     if (this.ItemName){
       for (var value of this.ListItem){
@@ -55,7 +58,7 @@ export class ModalComponent implements OnInit {
     }
     console.log(addBillForm)
     if (this.IsCustomerExist){
-      APIService.POST(`${environment.serverUrl}/v1/Merchant/CreateBill`,addBillForm)
+      APIService.POST(`${environment.serverUrl}/v1/Merchant/`+localStorage.getItem('UserToken')+`/CreateBill`,addBillForm)
       .then(respone => respone.json())
       .then(data => console.log(data))
       this.dialogRef.close()
@@ -69,10 +72,12 @@ export class ModalComponent implements OnInit {
   }
 
   getCustomer():void{
+    APIService.CheckToken('/')
+
     var Json = {
       CustomerPhone: this.CustomerPhone
     }
-    APIService.POST(`${environment.serverUrl}/v1/Merchant/Customer`,Json)
+    APIService.GET(`${environment.serverUrl}/v1/Merchant/Customer/`+ this.CustomerPhone )
     .then (respone => respone.json())
     .then(
       data => {
@@ -94,6 +99,7 @@ export class ModalComponent implements OnInit {
     this.CustomerName = ItemName
   }
   closeModal(): void{
+    APIService.CheckToken('/')
     this.dialogRef.close()
   }
 }

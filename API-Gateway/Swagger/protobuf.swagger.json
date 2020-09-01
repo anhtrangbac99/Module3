@@ -109,7 +109,7 @@
     },
     "/v1/Merchant/ListItem": {
       "get": {
-        "operationId": "MerchantMiddlewareService_GetListItem",
+        "operationId": "MerchantMiddlewareService_ListItem",
         "responses": {
           "200": {
             "description": "A successful response.",

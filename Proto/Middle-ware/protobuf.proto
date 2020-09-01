@@ -13,19 +13,15 @@ service MerchantMiddlewareService {
             body: "*"
 		};
     }
-    rpc SearchBill(SearchBillRequest) returns (ListSearchBillRespone) {
-        option (google.api.http) = {
-			post: "/v1/Merchant/SearchBill"
-            body:"*"
-		};
-    }
+
     rpc CreateBill(CreateBillRequest) returns (CreateBillRespone){
         option (google.api.http) = {
-			post: "/v1/Merchant/CreateBill"
+			post: "/v1/Merchant/{UserToken}/CreateBill"
             body:"*"
 		};
     }
-    rpc GetListItem(ListItemRequest) returns (ListItemRespone){
+    
+    rpc ListItem(ListItemRequest) returns (ListItemRespone){
         option (google.api.http) = {
 			get: "/v1/Merchant/ListItem"
 		};
@@ -33,11 +29,28 @@ service MerchantMiddlewareService {
 
     rpc GetCustomer(CustomerRequest) returns (CustomerRespone){
         option (google.api.http) = {
-			post: "/v1/Merchant/Customer"
-            body: "*"
-		};
+			get: "/v1/Merchant/Customer/{CustomerPhone}"
+        };
     }
-}
+
+    rpc Search(SearchRequest) returns (SearchRespone) {
+        option (google.api.http) = {
+            get: "/v1/Merchant/Search/{UserToken}/BillId/{BillId}/BillStatus/{BillStatus}/Amount/{Amount}/ItemId/{ItemId}/CustomerId/{CustomerId}/CustomerPhone/{CustomerPhone}/CustomerName/{CustomerName}/ItemName/{ItemName}/BillDesc/{BillDesc}"
+        };
+    }
+
+    rpc CheckUserToken(UserTokenRequest) returns (UserTokenRespone) {
+        option (google.api.http) = {
+            get: "/v1/Merchant/UserToken/{UserToken}"
+        };
+    }
+
+    rpc BillDetail(BillDetailRequest) returns (BillDetailRespone) {
+        option (google.api.http) = {
+            get: "/v1/Merchant/BillId/{BillId}"
+        };
+    }
+}   
 
 message AuthorRequest{
     string Username = 1;
@@ -46,20 +59,8 @@ message AuthorRequest{
 
 message AuthorRespone{
     int64 IsExisted = 1;
-    int64 User_Id = 2;
+    string User_Id = 2;
     int64 Authorized = 3;
-}
-
-message SearchBillRequest{
-    int64 BillId = 1;
-    int64 BillStatus = 2;
-    int64 ItemId = 3;
-    int64 Amount = 4;
-    int64 CustomerId = 5;
-    string CustomerPhone = 6;
-    string BillDesc = 7;
-    string ItemName = 8;
-    string CustomerName = 9;    
 }
 
 message SearchBillRespone{
@@ -74,10 +75,8 @@ message SearchBillRespone{
     string CustomerName = 9;    
 }
 
-message ListSearchBillRespone{
-    repeated SearchBillRespone SearchBillRespones = 1;
-}
 message CreateBillRequest{
+    string UserToken = 8;
     int64 ItemId = 3;
     int64 Amount = 4;
     int64 CustomerId = 5;
@@ -89,7 +88,6 @@ message CreateBillRespone{
 }
 
 message ListItemRequest{
-
 }
 
 message ListItemRespone{
@@ -109,4 +107,41 @@ message CustomerRespone{
     int64 CustomerId = 1;
     string CustomerName = 2;
     string CustomerPhone = 3;
+}
+
+message SearchRequest{  
+    string UserToken = 10; 
+    int64 BillId = 1;
+    int64 BillStatus = 2;
+    int64 ItemId = 3;
+    int64 Amount = 4;
+    int64 CustomerId = 5;
+    string CustomerPhone = 6;
+    string BillDesc = 7;
+    string ItemName = 8;
+    string CustomerName = 9; 
+}
+
+message SearchRespone{
+    repeated SearchBillRespone SearchRespones = 1;
+}
+
+message UserTokenRequest{
+    string UserToken = 1;
+}
+
+message UserTokenRespone {
+    int64 IsExisted = 1;
+    int64 Authorized = 2;
+}
+
+message BillDetailRequest{
+    int64 BillId = 1;
+}
+
+message BillDetailRespone{
+    string ItemName = 1;
+    int64 Amount = 2;
+    int64 Price = 3;
+    int64 Total = 4;
 }

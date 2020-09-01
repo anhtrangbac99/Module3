@@ -12,4 +12,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  SignOut(){
+    localStorage.removeItem('UserToken')
+    window.location.href = '/'
+  }
 }

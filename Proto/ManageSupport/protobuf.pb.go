@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.25.0-devel
 // 	protoc        (unknown)
-// source: ManageSupport/protobuf.proto
+// source: protobuf.proto
 
 package protobuf
 
@@ -38,7 +38,7 @@ type ListItemRequest struct {
 func (x *ListItemRequest) Reset() {
 	*x = ListItemRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ManageSupport_protobuf_proto_msgTypes[0]
+		mi := &file_protobuf_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -51,7 +51,7 @@ func (x *ListItemRequest) String() string {
 func (*ListItemRequest) ProtoMessage() {}
 
 func (x *ListItemRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_ManageSupport_protobuf_proto_msgTypes[0]
+	mi := &file_protobuf_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -64,7 +64,7 @@ func (x *ListItemRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListItemRequest.ProtoReflect.Descriptor instead.
 func (*ListItemRequest) Descriptor() ([]byte, []int) {
-	return file_ManageSupport_protobuf_proto_rawDescGZIP(), []int{0}
+	return file_protobuf_proto_rawDescGZIP(), []int{0}
 }
 
 type ListItemRespone struct {
@@ -79,7 +79,7 @@ type ListItemRespone struct {
 func (x *ListItemRespone) Reset() {
 	*x = ListItemRespone{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ManageSupport_protobuf_proto_msgTypes[1]
+		mi := &file_protobuf_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -92,7 +92,7 @@ func (x *ListItemRespone) String() string {
 func (*ListItemRespone) ProtoMessage() {}
 
 func (x *ListItemRespone) ProtoReflect() protoreflect.Message {
-	mi := &file_ManageSupport_protobuf_proto_msgTypes[1]
+	mi := &file_protobuf_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -105,7 +105,7 @@ func (x *ListItemRespone) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListItemRespone.ProtoReflect.Descriptor instead.
 func (*ListItemRespone) Descriptor() ([]byte, []int) {
-	return file_ManageSupport_protobuf_proto_rawDescGZIP(), []int{1}
+	return file_protobuf_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *ListItemRespone) GetItemName() string {
@@ -133,7 +133,7 @@ type CustomerRequest struct {
 func (x *CustomerRequest) Reset() {
 	*x = CustomerRequest{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ManageSupport_protobuf_proto_msgTypes[2]
+		mi := &file_protobuf_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -146,7 +146,7 @@ func (x *CustomerRequest) String() string {
 func (*CustomerRequest) ProtoMessage() {}
 
 func (x *CustomerRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_ManageSupport_protobuf_proto_msgTypes[2]
+	mi := &file_protobuf_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -159,7 +159,7 @@ func (x *CustomerRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomerRequest.ProtoReflect.Descriptor instead.
 func (*CustomerRequest) Descriptor() ([]byte, []int) {
-	return file_ManageSupport_protobuf_proto_rawDescGZIP(), []int{2}
+	return file_protobuf_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *CustomerRequest) GetCustomerPhone() string {
@@ -182,7 +182,7 @@ type CustomerRespone struct {
 func (x *CustomerRespone) Reset() {
 	*x = CustomerRespone{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_ManageSupport_protobuf_proto_msgTypes[3]
+		mi := &file_protobuf_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -195,7 +195,7 @@ func (x *CustomerRespone) String() string {
 func (*CustomerRespone) ProtoMessage() {}
 
 func (x *CustomerRespone) ProtoReflect() protoreflect.Message {
-	mi := &file_ManageSupport_protobuf_proto_msgTypes[3]
+	mi := &file_protobuf_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -208,7 +208,7 @@ func (x *CustomerRespone) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CustomerRespone.ProtoReflect.Descriptor instead.
 func (*CustomerRespone) Descriptor() ([]byte, []int) {
-	return file_ManageSupport_protobuf_proto_rawDescGZIP(), []int{3}
+	return file_protobuf_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *CustomerRespone) GetCustomerId() int64 {
@@ -232,80 +232,334 @@ func (x *CustomerRespone) GetCustomerPhone() string {
 	return ""
 }
 
-var File_ManageSupport_protobuf_proto protoreflect.FileDescriptor
+type UserTokenRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
 
-var file_ManageSupport_protobuf_proto_rawDesc = []byte{
-	0x0a, 0x1c, 0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x2f,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x08,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x22, 0x11, 0x0a, 0x0f, 0x4c, 0x69, 0x73, 0x74,
-	0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x45, 0x0a, 0x0f, 0x4c,
-	0x69, 0x73, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65, 0x12, 0x1a,
-	0x0a, 0x08, 0x49, 0x74, 0x65, 0x6d, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x08, 0x69, 0x74, 0x65, 0x6d, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x16, 0x0a, 0x06, 0x49, 0x74,
-	0x65, 0x6d, 0x49, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x69, 0x74, 0x65, 0x6d,
-	0x49, 0x64, 0x22, 0x37, 0x0a, 0x0f, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x52, 0x65,
-	0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x24, 0x0a, 0x0d, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65,
-	0x72, 0x50, 0x68, 0x6f, 0x6e, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x63, 0x75,
-	0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x50, 0x68, 0x6f, 0x6e, 0x65, 0x22, 0x7b, 0x0a, 0x0f, 0x43,
-	0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65, 0x12, 0x1e,
-	0x0a, 0x0a, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01,
-	0x28, 0x03, 0x52, 0x0a, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x49, 0x64, 0x12, 0x22,
-	0x0a, 0x0c, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x02,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x4e, 0x61,
-	0x6d, 0x65, 0x12, 0x24, 0x0a, 0x0d, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x50, 0x68,
-	0x6f, 0x6e, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x63, 0x75, 0x73, 0x74, 0x6f,
-	0x6d, 0x65, 0x72, 0x50, 0x68, 0x6f, 0x6e, 0x65, 0x32, 0x9f, 0x01, 0x0a, 0x0d, 0x4d, 0x61, 0x6e,
-	0x61, 0x67, 0x65, 0x53, 0x75, 0x70, 0x70, 0x6f, 0x72, 0x74, 0x12, 0x47, 0x0a, 0x0b, 0x47, 0x65,
-	0x74, 0x4c, 0x69, 0x73, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x12, 0x19, 0x2e, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x71,
-	0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e,
-	0x4c, 0x69, 0x73, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65, 0x22,
-	0x00, 0x30, 0x01, 0x12, 0x45, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d,
-	0x65, 0x72, 0x12, 0x19, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x43, 0x75,
-	0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65,
-	0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65, 0x22, 0x00, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	UserToken string `protobuf:"bytes,1,opt,name=UserToken,json=userToken,proto3" json:"UserToken,omitempty"`
+}
+
+func (x *UserTokenRequest) Reset() {
+	*x = UserTokenRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protobuf_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UserTokenRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserTokenRequest) ProtoMessage() {}
+
+func (x *UserTokenRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserTokenRequest.ProtoReflect.Descriptor instead.
+func (*UserTokenRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *UserTokenRequest) GetUserToken() string {
+	if x != nil {
+		return x.UserToken
+	}
+	return ""
+}
+
+type UserTokenRespone struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	IsExisted  int64 `protobuf:"varint,1,opt,name=IsExisted,json=isExisted,proto3" json:"IsExisted,omitempty"`
+	Authorized int64 `protobuf:"varint,2,opt,name=Authorized,json=authorized,proto3" json:"Authorized,omitempty"`
+}
+
+func (x *UserTokenRespone) Reset() {
+	*x = UserTokenRespone{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protobuf_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UserTokenRespone) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UserTokenRespone) ProtoMessage() {}
+
+func (x *UserTokenRespone) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UserTokenRespone.ProtoReflect.Descriptor instead.
+func (*UserTokenRespone) Descriptor() ([]byte, []int) {
+	return file_protobuf_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *UserTokenRespone) GetIsExisted() int64 {
+	if x != nil {
+		return x.IsExisted
+	}
+	return 0
+}
+
+func (x *UserTokenRespone) GetAuthorized() int64 {
+	if x != nil {
+		return x.Authorized
+	}
+	return 0
+}
+
+type BillDetailRequest struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	BillId int64 `protobuf:"varint,1,opt,name=BillId,json=billId,proto3" json:"BillId,omitempty"`
+}
+
+func (x *BillDetailRequest) Reset() {
+	*x = BillDetailRequest{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protobuf_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BillDetailRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BillDetailRequest) ProtoMessage() {}
+
+func (x *BillDetailRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BillDetailRequest.ProtoReflect.Descriptor instead.
+func (*BillDetailRequest) Descriptor() ([]byte, []int) {
+	return file_protobuf_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *BillDetailRequest) GetBillId() int64 {
+	if x != nil {
+		return x.BillId
+	}
+	return 0
+}
+
+type BillDetailRespone struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	ItemName string `protobuf:"bytes,1,opt,name=ItemName,json=itemName,proto3" json:"ItemName,omitempty"`
+	Amount   int64  `protobuf:"varint,2,opt,name=Amount,json=amount,proto3" json:"Amount,omitempty"`
+	Price    int64  `protobuf:"varint,3,opt,name=Price,json=price,proto3" json:"Price,omitempty"`
+	Total    int64  `protobuf:"varint,4,opt,name=Total,json=total,proto3" json:"Total,omitempty"`
+}
+
+func (x *BillDetailRespone) Reset() {
+	*x = BillDetailRespone{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_protobuf_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *BillDetailRespone) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*BillDetailRespone) ProtoMessage() {}
+
+func (x *BillDetailRespone) ProtoReflect() protoreflect.Message {
+	mi := &file_protobuf_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use BillDetailRespone.ProtoReflect.Descriptor instead.
+func (*BillDetailRespone) Descriptor() ([]byte, []int) {
+	return file_protobuf_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *BillDetailRespone) GetItemName() string {
+	if x != nil {
+		return x.ItemName
+	}
+	return ""
+}
+
+func (x *BillDetailRespone) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
+func (x *BillDetailRespone) GetPrice() int64 {
+	if x != nil {
+		return x.Price
+	}
+	return 0
+}
+
+func (x *BillDetailRespone) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
+}
+
+var File_protobuf_proto protoreflect.FileDescriptor
+
+var file_protobuf_proto_rawDesc = []byte{
+	0x0a, 0x0e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
+	0x12, 0x08, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x22, 0x11, 0x0a, 0x0f, 0x4c, 0x69,
+	0x73, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x22, 0x45, 0x0a,
+	0x0f, 0x4c, 0x69, 0x73, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65,
+	0x12, 0x1a, 0x0a, 0x08, 0x49, 0x74, 0x65, 0x6d, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x08, 0x69, 0x74, 0x65, 0x6d, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x16, 0x0a, 0x06,
+	0x49, 0x74, 0x65, 0x6d, 0x49, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x69, 0x74,
+	0x65, 0x6d, 0x49, 0x64, 0x22, 0x37, 0x0a, 0x0f, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72,
+	0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x24, 0x0a, 0x0d, 0x43, 0x75, 0x73, 0x74, 0x6f,
+	0x6d, 0x65, 0x72, 0x50, 0x68, 0x6f, 0x6e, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d,
+	0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x50, 0x68, 0x6f, 0x6e, 0x65, 0x22, 0x7b, 0x0a,
+	0x0f, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65,
+	0x12, 0x1e, 0x0a, 0x0a, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x49, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x49, 0x64,
+	0x12, 0x22, 0x0a, 0x0c, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x4e, 0x61, 0x6d, 0x65,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0c, 0x63, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72,
+	0x4e, 0x61, 0x6d, 0x65, 0x12, 0x24, 0x0a, 0x0d, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72,
+	0x50, 0x68, 0x6f, 0x6e, 0x65, 0x18, 0x03, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0d, 0x63, 0x75, 0x73,
+	0x74, 0x6f, 0x6d, 0x65, 0x72, 0x50, 0x68, 0x6f, 0x6e, 0x65, 0x22, 0x30, 0x0a, 0x10, 0x55, 0x73,
+	0x65, 0x72, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x12, 0x1c,
+	0x0a, 0x09, 0x55, 0x73, 0x65, 0x72, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x09, 0x75, 0x73, 0x65, 0x72, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x22, 0x50, 0x0a, 0x10,
+	0x55, 0x73, 0x65, 0x72, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65,
+	0x12, 0x1c, 0x0a, 0x09, 0x49, 0x73, 0x45, 0x78, 0x69, 0x73, 0x74, 0x65, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x09, 0x69, 0x73, 0x45, 0x78, 0x69, 0x73, 0x74, 0x65, 0x64, 0x12, 0x1e,
+	0x0a, 0x0a, 0x41, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x65, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x03, 0x52, 0x0a, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x69, 0x7a, 0x65, 0x64, 0x22, 0x2b,
+	0x0a, 0x11, 0x42, 0x69, 0x6c, 0x6c, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x52, 0x65, 0x71, 0x75,
+	0x65, 0x73, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x42, 0x69, 0x6c, 0x6c, 0x49, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x06, 0x62, 0x69, 0x6c, 0x6c, 0x49, 0x64, 0x22, 0x73, 0x0a, 0x11, 0x42,
+	0x69, 0x6c, 0x6c, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65,
+	0x12, 0x1a, 0x0a, 0x08, 0x49, 0x74, 0x65, 0x6d, 0x4e, 0x61, 0x6d, 0x65, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x08, 0x69, 0x74, 0x65, 0x6d, 0x4e, 0x61, 0x6d, 0x65, 0x12, 0x16, 0x0a, 0x06,
+	0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x06, 0x61, 0x6d,
+	0x6f, 0x75, 0x6e, 0x74, 0x12, 0x14, 0x0a, 0x05, 0x50, 0x72, 0x69, 0x63, 0x65, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x05, 0x70, 0x72, 0x69, 0x63, 0x65, 0x12, 0x14, 0x0a, 0x05, 0x54, 0x6f,
+	0x74, 0x61, 0x6c, 0x18, 0x04, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c,
+	0x32, 0xb2, 0x02, 0x0a, 0x0d, 0x4d, 0x61, 0x6e, 0x61, 0x67, 0x65, 0x53, 0x75, 0x70, 0x70, 0x6f,
+	0x72, 0x74, 0x12, 0x44, 0x0a, 0x08, 0x4c, 0x69, 0x73, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x12, 0x19,
+	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x49, 0x74,
+	0x65, 0x6d, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x19, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x49, 0x74, 0x65, 0x6d, 0x52, 0x65, 0x73,
+	0x70, 0x6f, 0x6e, 0x65, 0x22, 0x00, 0x30, 0x01, 0x12, 0x45, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x43,
+	0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x12, 0x19, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62,
+	0x75, 0x66, 0x2e, 0x43, 0x75, 0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x52, 0x65, 0x71, 0x75, 0x65,
+	0x73, 0x74, 0x1a, 0x19, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x43, 0x75,
+	0x73, 0x74, 0x6f, 0x6d, 0x65, 0x72, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65, 0x22, 0x00, 0x12,
+	0x4a, 0x0a, 0x0e, 0x43, 0x68, 0x65, 0x63, 0x6b, 0x55, 0x73, 0x65, 0x72, 0x54, 0x6f, 0x6b, 0x65,
+	0x6e, 0x12, 0x1a, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x55, 0x73, 0x65,
+	0x72, 0x54, 0x6f, 0x6b, 0x65, 0x6e, 0x52, 0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1a, 0x2e,
+	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x54, 0x6f, 0x6b,
+	0x65, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x65, 0x22, 0x00, 0x12, 0x48, 0x0a, 0x0a, 0x42,
+	0x69, 0x6c, 0x6c, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x12, 0x1b, 0x2e, 0x70, 0x72, 0x6f, 0x74,
+	0x6f, 0x62, 0x75, 0x66, 0x2e, 0x42, 0x69, 0x6c, 0x6c, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x52,
+	0x65, 0x71, 0x75, 0x65, 0x73, 0x74, 0x1a, 0x1b, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75,
+	0x66, 0x2e, 0x42, 0x69, 0x6c, 0x6c, 0x44, 0x65, 0x74, 0x61, 0x69, 0x6c, 0x52, 0x65, 0x73, 0x70,
+	0x6f, 0x6e, 0x65, 0x22, 0x00, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
-	file_ManageSupport_protobuf_proto_rawDescOnce sync.Once
-	file_ManageSupport_protobuf_proto_rawDescData = file_ManageSupport_protobuf_proto_rawDesc
+	file_protobuf_proto_rawDescOnce sync.Once
+	file_protobuf_proto_rawDescData = file_protobuf_proto_rawDesc
 )
 
-func file_ManageSupport_protobuf_proto_rawDescGZIP() []byte {
-	file_ManageSupport_protobuf_proto_rawDescOnce.Do(func() {
-		file_ManageSupport_protobuf_proto_rawDescData = protoimpl.X.CompressGZIP(file_ManageSupport_protobuf_proto_rawDescData)
+func file_protobuf_proto_rawDescGZIP() []byte {
+	file_protobuf_proto_rawDescOnce.Do(func() {
+		file_protobuf_proto_rawDescData = protoimpl.X.CompressGZIP(file_protobuf_proto_rawDescData)
 	})
-	return file_ManageSupport_protobuf_proto_rawDescData
+	return file_protobuf_proto_rawDescData
 }
 
-var file_ManageSupport_protobuf_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
-var file_ManageSupport_protobuf_proto_goTypes = []interface{}{
-	(*ListItemRequest)(nil), // 0: protobuf.ListItemRequest
-	(*ListItemRespone)(nil), // 1: protobuf.ListItemRespone
-	(*CustomerRequest)(nil), // 2: protobuf.CustomerRequest
-	(*CustomerRespone)(nil), // 3: protobuf.CustomerRespone
+var file_protobuf_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
+var file_protobuf_proto_goTypes = []interface{}{
+	(*ListItemRequest)(nil),   // 0: protobuf.ListItemRequest
+	(*ListItemRespone)(nil),   // 1: protobuf.ListItemRespone
+	(*CustomerRequest)(nil),   // 2: protobuf.CustomerRequest
+	(*CustomerRespone)(nil),   // 3: protobuf.CustomerRespone
+	(*UserTokenRequest)(nil),  // 4: protobuf.UserTokenRequest
+	(*UserTokenRespone)(nil),  // 5: protobuf.UserTokenRespone
+	(*BillDetailRequest)(nil), // 6: protobuf.BillDetailRequest
+	(*BillDetailRespone)(nil), // 7: protobuf.BillDetailRespone
 }
-var file_ManageSupport_protobuf_proto_depIdxs = []int32{
-	0, // 0: protobuf.ManageSupport.GetListItem:input_type -> protobuf.ListItemRequest
+var file_protobuf_proto_depIdxs = []int32{
+	0, // 0: protobuf.ManageSupport.ListItem:input_type -> protobuf.ListItemRequest
 	2, // 1: protobuf.ManageSupport.GetCustomer:input_type -> protobuf.CustomerRequest
-	1, // 2: protobuf.ManageSupport.GetListItem:output_type -> protobuf.ListItemRespone
-	3, // 3: protobuf.ManageSupport.GetCustomer:output_type -> protobuf.CustomerRespone
-	2, // [2:4] is the sub-list for method output_type
-	0, // [0:2] is the sub-list for method input_type
+	4, // 2: protobuf.ManageSupport.CheckUserToken:input_type -> protobuf.UserTokenRequest
+	6, // 3: protobuf.ManageSupport.BillDetail:input_type -> protobuf.BillDetailRequest
+	1, // 4: protobuf.ManageSupport.ListItem:output_type -> protobuf.ListItemRespone
+	3, // 5: protobuf.ManageSupport.GetCustomer:output_type -> protobuf.CustomerRespone
+	5, // 6: protobuf.ManageSupport.CheckUserToken:output_type -> protobuf.UserTokenRespone
+	7, // 7: protobuf.ManageSupport.BillDetail:output_type -> protobuf.BillDetailRespone
+	4, // [4:8] is the sub-list for method output_type
+	0, // [0:4] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
 }
 
-func init() { file_ManageSupport_protobuf_proto_init() }
-func file_ManageSupport_protobuf_proto_init() {
-	if File_ManageSupport_protobuf_proto != nil {
+func init() { file_protobuf_proto_init() }
+func file_protobuf_proto_init() {
+	if File_protobuf_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_ManageSupport_protobuf_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_protobuf_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListItemRequest); i {
 			case 0:
 				return &v.state
@@ -317,7 +571,7 @@ func file_ManageSupport_protobuf_proto_init() {
 				return nil
 			}
 		}
-		file_ManageSupport_protobuf_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_protobuf_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListItemRespone); i {
 			case 0:
 				return &v.state
@@ -329,7 +583,7 @@ func file_ManageSupport_protobuf_proto_init() {
 				return nil
 			}
 		}
-		file_ManageSupport_protobuf_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_protobuf_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CustomerRequest); i {
 			case 0:
 				return &v.state
@@ -341,8 +595,56 @@ func file_ManageSupport_protobuf_proto_init() {
 				return nil
 			}
 		}
-		file_ManageSupport_protobuf_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_protobuf_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CustomerRespone); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protobuf_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UserTokenRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protobuf_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UserTokenRespone); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protobuf_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BillDetailRequest); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_protobuf_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*BillDetailRespone); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -358,20 +660,20 @@ func file_ManageSupport_protobuf_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_ManageSupport_protobuf_proto_rawDesc,
+			RawDescriptor: file_protobuf_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   4,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_ManageSupport_protobuf_proto_goTypes,
-		DependencyIndexes: file_ManageSupport_protobuf_proto_depIdxs,
-		MessageInfos:      file_ManageSupport_protobuf_proto_msgTypes,
+		GoTypes:           file_protobuf_proto_goTypes,
+		DependencyIndexes: file_protobuf_proto_depIdxs,
+		MessageInfos:      file_protobuf_proto_msgTypes,
 	}.Build()
-	File_ManageSupport_protobuf_proto = out.File
-	file_ManageSupport_protobuf_proto_rawDesc = nil
-	file_ManageSupport_protobuf_proto_goTypes = nil
-	file_ManageSupport_protobuf_proto_depIdxs = nil
+	File_protobuf_proto = out.File
+	file_protobuf_proto_rawDesc = nil
+	file_protobuf_proto_goTypes = nil
+	file_protobuf_proto_depIdxs = nil
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -386,8 +688,10 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ManageSupportClient interface {
-	GetListItem(ctx context.Context, in *ListItemRequest, opts ...grpc.CallOption) (ManageSupport_GetListItemClient, error)
+	ListItem(ctx context.Context, in *ListItemRequest, opts ...grpc.CallOption) (ManageSupport_ListItemClient, error)
 	GetCustomer(ctx context.Context, in *CustomerRequest, opts ...grpc.CallOption) (*CustomerRespone, error)
+	CheckUserToken(ctx context.Context, in *UserTokenRequest, opts ...grpc.CallOption) (*UserTokenRespone, error)
+	BillDetail(ctx context.Context, in *BillDetailRequest, opts ...grpc.CallOption) (*BillDetailRespone, error)
 }
 
 type manageSupportClient struct {
@@ -398,12 +702,12 @@ func NewManageSupportClient(cc grpc.ClientConnInterface) ManageSupportClient {
 	return &manageSupportClient{cc}
 }
 
-func (c *manageSupportClient) GetListItem(ctx context.Context, in *ListItemRequest, opts ...grpc.CallOption) (ManageSupport_GetListItemClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ManageSupport_serviceDesc.Streams[0], "/protobuf.ManageSupport/GetListItem", opts...)
+func (c *manageSupportClient) ListItem(ctx context.Context, in *ListItemRequest, opts ...grpc.CallOption) (ManageSupport_ListItemClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_ManageSupport_serviceDesc.Streams[0], "/protobuf.ManageSupport/ListItem", opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &manageSupportGetListItemClient{stream}
+	x := &manageSupportListItemClient{stream}
 	if err := x.ClientStream.SendMsg(in); err != nil {
 		return nil, err
 	}
@@ -413,16 +717,16 @@ func (c *manageSupportClient) GetListItem(ctx context.Context, in *ListItemReque
 	return x, nil
 }
 
-type ManageSupport_GetListItemClient interface {
+type ManageSupport_ListItemClient interface {
 	Recv() (*ListItemRespone, error)
 	grpc.ClientStream
 }
 
-type manageSupportGetListItemClient struct {
+type manageSupportListItemClient struct {
 	grpc.ClientStream
 }
 
-func (x *manageSupportGetListItemClient) Recv() (*ListItemRespone, error) {
+func (x *manageSupportListItemClient) Recv() (*ListItemRespone, error) {
 	m := new(ListItemRespone)
 	if err := x.ClientStream.RecvMsg(m); err != nil {
 		return nil, err
@@ -439,45 +743,71 @@ func (c *manageSupportClient) GetCustomer(ctx context.Context, in *CustomerReque
 	return out, nil
 }
 
+func (c *manageSupportClient) CheckUserToken(ctx context.Context, in *UserTokenRequest, opts ...grpc.CallOption) (*UserTokenRespone, error) {
+	out := new(UserTokenRespone)
+	err := c.cc.Invoke(ctx, "/protobuf.ManageSupport/CheckUserToken", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *manageSupportClient) BillDetail(ctx context.Context, in *BillDetailRequest, opts ...grpc.CallOption) (*BillDetailRespone, error) {
+	out := new(BillDetailRespone)
+	err := c.cc.Invoke(ctx, "/protobuf.ManageSupport/BillDetail", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ManageSupportServer is the server API for ManageSupport service.
 type ManageSupportServer interface {
-	GetListItem(*ListItemRequest, ManageSupport_GetListItemServer) error
+	ListItem(*ListItemRequest, ManageSupport_ListItemServer) error
 	GetCustomer(context.Context, *CustomerRequest) (*CustomerRespone, error)
+	CheckUserToken(context.Context, *UserTokenRequest) (*UserTokenRespone, error)
+	BillDetail(context.Context, *BillDetailRequest) (*BillDetailRespone, error)
 }
 
 // UnimplementedManageSupportServer can be embedded to have forward compatible implementations.
 type UnimplementedManageSupportServer struct {
 }
 
-func (*UnimplementedManageSupportServer) GetListItem(*ListItemRequest, ManageSupport_GetListItemServer) error {
-	return status.Errorf(codes.Unimplemented, "method GetListItem not implemented")
+func (*UnimplementedManageSupportServer) ListItem(*ListItemRequest, ManageSupport_ListItemServer) error {
+	return status.Errorf(codes.Unimplemented, "method ListItem not implemented")
 }
 func (*UnimplementedManageSupportServer) GetCustomer(context.Context, *CustomerRequest) (*CustomerRespone, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCustomer not implemented")
+}
+func (*UnimplementedManageSupportServer) CheckUserToken(context.Context, *UserTokenRequest) (*UserTokenRespone, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CheckUserToken not implemented")
+}
+func (*UnimplementedManageSupportServer) BillDetail(context.Context, *BillDetailRequest) (*BillDetailRespone, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method BillDetail not implemented")
 }
 
 func RegisterManageSupportServer(s *grpc.Server, srv ManageSupportServer) {
 	s.RegisterService(&_ManageSupport_serviceDesc, srv)
 }
 
-func _ManageSupport_GetListItem_Handler(srv interface{}, stream grpc.ServerStream) error {
+func _ManageSupport_ListItem_Handler(srv interface{}, stream grpc.ServerStream) error {
 	m := new(ListItemRequest)
 	if err := stream.RecvMsg(m); err != nil {
 		return err
 	}
-	return srv.(ManageSupportServer).GetListItem(m, &manageSupportGetListItemServer{stream})
+	return srv.(ManageSupportServer).ListItem(m, &manageSupportListItemServer{stream})
 }
 
-type ManageSupport_GetListItemServer interface {
+type ManageSupport_ListItemServer interface {
 	Send(*ListItemRespone) error
 	grpc.ServerStream
 }
 
-type manageSupportGetListItemServer struct {
+type manageSupportListItemServer struct {
 	grpc.ServerStream
 }
 
-func (x *manageSupportGetListItemServer) Send(m *ListItemRespone) error {
+func (x *manageSupportListItemServer) Send(m *ListItemRespone) error {
 	return x.ServerStream.SendMsg(m)
 }
 
@@ -499,6 +829,42 @@ func _ManageSupport_GetCustomer_Handler(srv interface{}, ctx context.Context, de
 	return interceptor(ctx, in, info, handler)
 }
 
+func _ManageSupport_CheckUserToken_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserTokenRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ManageSupportServer).CheckUserToken(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protobuf.ManageSupport/CheckUserToken",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ManageSupportServer).CheckUserToken(ctx, req.(*UserTokenRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _ManageSupport_BillDetail_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(BillDetailRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ManageSupportServer).BillDetail(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/protobuf.ManageSupport/BillDetail",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ManageSupportServer).BillDetail(ctx, req.(*BillDetailRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 var _ManageSupport_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "protobuf.ManageSupport",
 	HandlerType: (*ManageSupportServer)(nil),
@@ -507,13 +873,21 @@ var _ManageSupport_serviceDesc = grpc.ServiceDesc{
 			MethodName: "GetCustomer",
 			Handler:    _ManageSupport_GetCustomer_Handler,
 		},
+		{
+			MethodName: "CheckUserToken",
+			Handler:    _ManageSupport_CheckUserToken_Handler,
+		},
+		{
+			MethodName: "BillDetail",
+			Handler:    _ManageSupport_BillDetail_Handler,
+		},
 	},
 	Streams: []grpc.StreamDesc{
 		{
-			StreamName:    "GetListItem",
-			Handler:       _ManageSupport_GetListItem_Handler,
+			StreamName:    "ListItem",
+			Handler:       _ManageSupport_ListItem_Handler,
 			ServerStreams: true,
 		},
 	},
-	Metadata: "ManageSupport/protobuf.proto",
+	Metadata: "protobuf.proto",
 }

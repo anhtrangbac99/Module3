@@ -66,23 +66,32 @@ message AuthorRespone{
 message SearchBillRespone{
     int64 BillId = 1;
     int64 BillStatus = 2;
-    int64 ItemId = 3;
-    int64 Amount = 4;
     int64 CustomerId = 5;
     string CustomerPhone = 6;
     string BillDesc = 7;
-    string ItemName = 8;
-    string CustomerName = 9;    
+    string CustomerName = 9; 
+    repeated ListItem Item = 10;
+}
+
+message ListItem{
+    int64 ItemId = 1;
+    int64 Amount = 2;
+    string ItemName = 3;
 }
 
 message CreateBillRequest{
     string UserToken = 8;
-    int64 ItemId = 3;
-    int64 Amount = 4;
+    //int64 ItemId = 3;
+    //int64 Amount = 4;
+    repeated CreateBillItem Item = 2;
     int64 CustomerId = 5;
     string BillDesc = 7; 
 }
 
+message CreateBillItem{
+    int64 ItemId = 1;
+    int64 Amount = 2;
+}
 message CreateBillRespone{
     int64 IsSaved = 1;
 }
@@ -140,8 +149,12 @@ message BillDetailRequest{
 }
 
 message BillDetailRespone{
+    repeated BillDetailItem ListItem = 1;
+    int64 Total = 4;
+}
+
+message BillDetailItem{
     string ItemName = 1;
     int64 Amount = 2;
     int64 Price = 3;
-    int64 Total = 4;
 }

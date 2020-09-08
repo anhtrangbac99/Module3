@@ -312,7 +312,7 @@
         }
       }
     },
-    "merchantBillDetailRespone": {
+    "merchantBillDetailItem": {
       "type": "object",
       "properties": {
         "ItemName": {
@@ -325,8 +325,32 @@
         "Price": {
           "type": "string",
           "format": "int64"
+        }
+      }
+    },
+    "merchantBillDetailRespone": {
+      "type": "object",
+      "properties": {
+        "ListItem": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/merchantBillDetailItem"
+          }
         },
         "Total": {
+          "type": "string",
+          "format": "int64"
+        }
+      }
+    },
+    "merchantCreateBillItem": {
+      "type": "object",
+      "properties": {
+        "ItemId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "Amount": {
           "type": "string",
           "format": "int64"
         }
@@ -338,13 +362,12 @@
         "UserToken": {
           "type": "string"
         },
-        "ItemId": {
-          "type": "string",
-          "format": "int64"
-        },
-        "Amount": {
-          "type": "string",
-          "format": "int64"
+        "Item": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/merchantCreateBillItem"
+          },
+          "title": "int64 ItemId = 3;\nint64 Amount = 4;"
         },
         "CustomerId": {
           "type": "string",
@@ -391,6 +414,22 @@
         }
       }
     },
+    "merchantListItem": {
+      "type": "object",
+      "properties": {
+        "ItemId": {
+          "type": "string",
+          "format": "int64"
+        },
+        "Amount": {
+          "type": "string",
+          "format": "int64"
+        },
+        "ItemName": {
+          "type": "string"
+        }
+      }
+    },
     "merchantListItemRespone": {
       "type": "object",
       "properties": {
@@ -413,14 +452,6 @@
           "type": "string",
           "format": "int64"
         },
-        "ItemId": {
-          "type": "string",
-          "format": "int64"
-        },
-        "Amount": {
-          "type": "string",
-          "format": "int64"
-        },
         "CustomerId": {
           "type": "string",
           "format": "int64"
@@ -431,11 +462,14 @@
         "BillDesc": {
           "type": "string"
         },
-        "ItemName": {
-          "type": "string"
-        },
         "CustomerName": {
           "type": "string"
+        },
+        "Item": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/merchantListItem"
+          }
         }
       }
     },

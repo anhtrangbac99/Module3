@@ -23,22 +23,25 @@ message SearchBillRequest{
 message SearchBillRespone{
     int64 BillId = 1;
     int64 BillStatus = 2;
-    int64 ItemId = 3;
-    int64 Amount = 4;
     int64 CustomerId = 5;
     string CustomerPhone = 6;
     string BillDesc = 7;
+    string CustomerName = 9; 
+    int64 ItemId = 3;
+    int64 Amount = 4;
     string ItemName = 8;
-    string CustomerName = 9;    
 }
 
 message CreateBillRequest{
-    int64 ItemId = 3;
-    int64 Amount = 4;
+    repeated CreateBillItem Item = 3;
     int64 CustomerId = 5;
     string BillDesc = 7; 
 }
 
+message CreateBillItem{
+    int64 ItemId = 3;
+    int64 Amount = 4;
+}
 message CreateBillRespone{
     int64 IsSaved = 1;
 }

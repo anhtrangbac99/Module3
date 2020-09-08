@@ -27,17 +27,21 @@
             <div class="form-row">
                 <div class="form-group col-md-12">
                     <label >List Items</label>
-                    <!-- <select [(ngModel)]="ItemName" name="ItemName" id="ListItems" class="form-control"> -->
-                    <select [(ngModel)]="ItemName" name="ItemName" id="ItemName" class="form-control">
-                        <option selected *ngFor="let Item of this.ListItem" >{{Item['ItemName']}}</option>
-                    </select>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label >Amount</label>
-                    <input [(ngModel)]="Amount" name="Amount" type="text" class="form-control" id="Amount" placeholder="Amount">
+                    <table class="table">
+                        <thead>
+                            <th scope="col">Item Id</th>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">Amount</th>
+                        </thead>
+                        <tbody>
+                                <tr *ngFor="let Item of this.ListItem,let i = index">
+                                    <th scope="row">{{Item['ItemId']}}</th>
+                                    <td>{{Item['ItemName']}}</td>
+                                    <td><input type="text" class="form-control" id="CustomerName" placeholder="0" (keyup)="ChangeAmount(i,$event)"></td>
+                                </tr>
+                        </tbody>
+                
+                    </table>
                 </div>
             </div>
 

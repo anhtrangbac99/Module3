@@ -1,14 +1,14 @@
 package main
 
 import (
-	pb "google.golang.org/grpc/examples/App/Proto/ManageBill"
+	pb "git.zapa.cloud/fresher/kietcdx/Module3/App/Proto/Merchant/ManageBill"
 	grpc "google.golang.org/grpc"
 	_ "github.com/go-sql-driver/mysql"
 	"log"
 	"fmt"
 	"sync"
 	"net"
-	handler "google.golang.org/grpc/examples/App/Core/Merchant/Manage_Bill/Handler"
+	handler "git.zapa.cloud/fresher/kietcdx/Module3/App/Core/Merchant/Manage_Bill/Handler"
 
 )
 

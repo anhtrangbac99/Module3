@@ -2,12 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dialog';
 import { APIService } from '../api.service';
 import { environment } from 'src/environments/environment';
+import {Item} from 'src/app/modal/itemclass'
 
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
+
 export class ModalComponent implements OnInit {
   public ListItem : any
   public Message : any
@@ -20,6 +22,7 @@ export class ModalComponent implements OnInit {
   public ItemName : any
   public IsCustomerExist = false
 
+  public ListItemCreate: Array<Item> = []
   constructor(public dialogRef: MatDialogRef<ModalComponent>) { }
 
   ngOnInit(): void {
@@ -30,29 +33,28 @@ export class ModalComponent implements OnInit {
     .then(
       data => {
         this.ListItem = data
-        console.log(this.ListItem)
+        for (var value of this.ListItem){
+          let item = new Item()
+          item.ItemId = value['ItemId']
+          item.Amount = 0
+          this.ListItemCreate.push(item)
+        }
+        console.log(this.ListItem)        
+        console.log(this.ListItemCreate)
+
       }
     )
   }
 
+  ChangeAmount(index,event) : void {
+    this.ListItemCreate[index].Amount = event.target.value
+    console.log(this.ListItemCreate[index])
+  }
   addBill():void {
     APIService.CheckToken('/')
 
-    /*************** Add Bill Start Here ***************/
-    if (this.ItemName){
-      for (var value of this.ListItem){
-        if (this.ItemName == value['ItemName']){
-          this.ItemId = value['ItemId']
-        }
-      }
-    }
-    else {
-      this.ItemId = this.ListItem[this.ListItem.length-1]['ItemId']
-    }
-
     var addBillForm = {
-      ItemId : this.ItemId,
-      Amount : this.Amount,
+      Item : this.ListItemCreate,
       CustomerId: this.CustomerId,
       BillDesc : this.BillDesc
     }
@@ -94,10 +96,10 @@ export class ModalComponent implements OnInit {
     )
   }
 
-  setItemName(ItemName : string): void {
-    console.log(ItemName)
-    this.CustomerName = ItemName
-  }
+  // setItemName(ItemName : string): void {
+  //   console.log(ItemName)
+  //   this.CustomerName = ItemName
+  // }
   closeModal(): void{
     APIService.CheckToken('/')
     this.dialogRef.close()

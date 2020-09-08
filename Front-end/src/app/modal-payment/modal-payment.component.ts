@@ -19,6 +19,7 @@ export class ModalPaymentComponent implements OnInit {
     .then (respone => respone.json())
     .then (data =>{
       this.BillDetailForm = data
+      console.log(this.BillDetailForm)
     })
   }
 

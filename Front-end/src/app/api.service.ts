@@ -1,10 +1,13 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
+import 'whatwg-fetch'
 
 @Injectable({
   providedIn: 'root'
 })
 export class APIService {
+  static http: HttpClient;
   constructor() { }
 
   static POST(url,data) {
@@ -21,11 +24,14 @@ export class APIService {
     return fetch(url, {
       method: 'GET',
       headers: new Headers({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
       }),
-      //body : JSON.stringify(data)
     })
   }
+
+  // static GET(url){
+  //   return this.http.get(url)
+  // }
 
   static CheckToken(url:string) : void{
     let UserToken = localStorage.getItem('UserToken')

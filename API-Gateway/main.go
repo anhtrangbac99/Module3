@@ -7,14 +7,12 @@ import (
 	"fmt"
 	"google.golang.org/grpc"
 	"path"
-	//"log"
-	//"encoding/json"
-	gwMerchant "google.golang.org/grpc/examples/App/Proto/Middle-ware"
+	gwMerchant "git.zapa.cloud/fresher/kietcdx/Module3/App/Proto/Middle-ware"
 	"github.com/golang/glog"
 	"github.com/grpc-ecosystem/grpc-gateway/runtime"
 	"golang.org/x/net/context"
-	// "github.com/gorilla/mux"
-	// "github.com/gorilla/handlers"
+	//"github.com/go-redis/redis/v8" 
+
 )
 
 const (
@@ -24,7 +22,6 @@ type User struct{
 	Username string 
 	Password string
 }
-
 
 var (
 	merchantEnpoint = flag.String("merchant", merchantEndpoint, "endpoint of merchant")
@@ -38,6 +35,7 @@ func serveSwagger(w http.ResponseWriter, r *http.Request) {
 	p = path.Join(*swaggerDir, p)
 	http.ServeFile(w, r, p)
 }
+
 
 func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handler, error) {
 	mux := runtime.NewServeMux(opts...)
@@ -54,7 +52,7 @@ func newGateway(ctx context.Context, opts ...runtime.ServeMuxOption) (http.Handl
 func preflightHandler(w http.ResponseWriter, r *http.Request) {
 	headers := []string{"Content-Type", "Accept"}
 	w.Header().Set("Access-Control-Allow-Headers", strings.Join(headers, ","))
-	methods := []string{"GET", "HEAD", "POST", "PUT", "DELETE"}
+	methods := []string{"GET", "HEAD", "POST", "PUT", "DELETE","PATCH","OPTIONS"}
 	w.Header().Set("Access-Control-Allow-Methods", strings.Join(methods, ","))
 	glog.Infof("preflight request for %s", r.URL.Path)
 	fmt.Println(r)
@@ -66,7 +64,8 @@ func allowCORS(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if origin := r.Header.Get("Origin"); origin != "" {
 			w.Header().Set("Access-Control-Allow-Origin", origin)
-			if r.Method == "OPTIONS" && r.Header.Get("Access-Control-Request-Method") != "" {
+			//r.Method == "OPTIONS" && 
+			if r.Header.Get("Access-Control-Request-Method") != "" {
 				preflightHandler(w, r)
 				return
 			}

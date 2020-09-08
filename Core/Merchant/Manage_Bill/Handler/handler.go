@@ -3,38 +3,37 @@ package handler
 import (
 	_ "github.com/go-sql-driver/mysql"
 	"database/sql"
-	elastic "github.com/elastic/go-elasticsearch/v8"
 	elastic1 "github.com/olivere/elastic/v7"
-	"github.com/elastic/go-elasticsearch/v8/esapi"
 	"encoding/json"
 	"log"
 	"fmt"
 	"strconv"
-	"strings"
 	"sync"
 	"context"
 	"github.com/golang/glog"
-	pb "google.golang.org/grpc/examples/App/Proto/ManageBill"
+	pb "git.zapa.cloud/fresher/kietcdx/Module3/App/Proto/Merchant/ManageBill"
 	"github.com/go-redis/redis/v8"  
 
 
 )
 
 type ElasticDocs struct {
-	Bill_Id int
-	Bill_Status int
-	Amount int
-	Item_Id int
-	Customer_Id int
-	Item_Name string
-	Customer_Name string
-	Customer_Phone string
-	Bill_Desc string
+	BillDetailId int `json:"BillDetail_Id"`
+	BillId int `json:"Bill_Id"`
+	BillStatus int `json:"Bill_Status"`
+	Amount int `json:"Amount"`
+	ItemId int `json:"Item_Id"`
+	CustomerId int `json:"Customer_Id"`
+	ItemName string `json:"Item_Name"`
+	CustomerName string `json:"Customer_Name"`
+	CustomerPhone string `json:"Customer_Phone"`
+	BillDesc string `json:"Bill_Desc"`
 }
 
 type Authorized struct {
 	Authorized int
 }
+
 func AccessDB() (*sql.DB){
 	dbDriver := "mysql"
  
@@ -46,8 +45,8 @@ func AccessDB() (*sql.DB){
 	return db
 }
 
-func GetESClient() (*elastic.Client,error){
-	client, err :=  elastic.NewClient(elastic.Config{Addresses: []string{"http://localhost:9200"}})
+func GetESClient() (*elastic1.Client,error){
+	client, err :=  elastic1.NewClient()
 
 	return client,err
 }
@@ -55,15 +54,15 @@ func GetESClient() (*elastic.Client,error){
 func JsonStruct(doc ElasticDocs) string {
 
     docStruct := &ElasticDocs{
-        Bill_Id: doc.Bill_Id,
-		Bill_Status: doc.Bill_Status,
+        BillId: doc.BillId,
+		BillStatus: doc.BillStatus,
 		Amount: doc.Amount,
-		Item_Id: doc.Item_Id,
-		Customer_Id: doc.Customer_Id,
-		Item_Name: doc.Item_Name,
-		Customer_Name: doc.Customer_Name,
-		Customer_Phone: doc.Customer_Phone,
-		Bill_Desc: doc.Bill_Desc}
+		ItemId: doc.ItemId,
+		CustomerId: doc.CustomerId,
+		ItemName: doc.ItemName,
+		CustomerName: doc.CustomerName,
+		CustomerPhone: doc.CustomerPhone,
+		BillDesc: doc.BillDesc}
 
     b, err := json.Marshal(docStruct)
     if err != nil {
@@ -73,49 +72,37 @@ func JsonStruct(doc ElasticDocs) string {
     return string(b)
 }
 
-func InsertEs(esclient *elastic.Client,request *pb.CreateBillRequest,Bill_Id int) (error){
+func InsertEs(esclient *elastic1.Client,request *pb.CreateBillRequest,BillDetail_Id int) (error){
 	DB := AccessDB()
 
-	Query := `SELECT b.Bill_Id,b.Bill_Status,b.Amount,b.Item_Id,b.Customer_Id,i.Item_Name,c.Customer_Name,c.Customer_Phone,b.Bill_Desc
-	FROM Bill AS b
-	LEFT JOIN Item AS i ON b.Item_Id=i.Item_Id
+	Query := `SELECT bd.BillDetail_Id,bd.Bill_Id,b.Bill_Status,bd.Amount,bd.Item_Id,b.Customer_Id,i.Item_Name,c.Customer_Name,c.Customer_Phone,b.Bill_Desc
+	FROM BillDetail as bd
+	LEFT JOIN Bill AS b ON bd.Bill_Id=b.Bill_Id
+	LEFT JOIN Item AS i ON bd.Item_Id=i.Item_Id
 	LEFT JOIN Customer AS c ON b.Customer_Id=c.Customer_Id
-	WHERE Bill_Id=` + strconv.Itoa(Bill_Id) + `;`
+	WHERE bd.BillDetail_Id=` + strconv.Itoa(BillDetail_Id) + `;`
 	bill,err := DB.Query(Query)
-	column,err := bill.Columns()
-	fmt.Println(column)
 	if err != nil {
 		log.Fatal(err)
 	}
 	var doc1 ElasticDocs
 
 	for bill.Next(){
-		err = bill.Scan(&doc1.Bill_Id,&doc1.Bill_Status,&doc1.Amount,&doc1.Item_Id,&doc1.Customer_Id,&doc1.Item_Name,&doc1.Customer_Name,&doc1.Customer_Phone,&doc1.Bill_Desc)
-	}
+		err = bill.Scan(&doc1.BillDetailId,&doc1.BillId,&doc1.BillStatus,&doc1.Amount,&doc1.ItemId,&doc1.CustomerId,&doc1.ItemName,&doc1.CustomerName,&doc1.CustomerPhone,&doc1.BillDesc)
 
-	fmt.Println(doc1)
-	req := esapi.IndexRequest{
-		Index:      "module3",
-		Body:       strings.NewReader(JsonStruct(doc1)),
-		Refresh:    "true",
+		fmt.Println(doc1)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		res,err := esclient.Index().Index(`module3`).Type("_doc").BodyJson(doc1).Do(context.Background())
+		if err != nil {
+			log.Fatal(err)
+		}
+				
+		glog.Info(`Index document`,res.Id)
 	}
-	res, err := req.Do(context.Background(), esclient)
 	
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer res.Body.Close()
-			
-	var resMap map[string]interface{}
-	if err := json.NewDecoder(res.Body).Decode(&resMap); err != nil {
-			log.Printf("Error parsing the response body: %s", err)
-	} else {
-		log.Printf("\nIndexRequest() RESPONSE:")
-		fmt.Println("Status:", res.Status())
-		fmt.Println("Result:", resMap["result"])
-		fmt.Println("Version:", int(resMap["_version"].(float64)))
-	}
-
 	return nil
 }
 
@@ -131,8 +118,6 @@ type ManageBillServer struct {
 
 
 func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.ManageBill_SearchBillServer) error{
-	esclient,err := elastic1.NewClient()
-	LogError(err)
 	esclient2,err:= GetESClient()
 	LogError(err)
 
@@ -198,7 +183,7 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 	}
 
 
-	res, err := esclient.Search().Index("module3").Size(100).Query(bq).Do(context.Background())
+	res, err := esclient2.Search().Index("module3").Size(100).Query(bq).Do(context.Background())
 
 	if err != nil {
 		log.Fatal(err)
@@ -221,9 +206,12 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 	Wg := sync.WaitGroup{}
 	var mux sync.Mutex
 	if len(billsEs) == 0{
-		Query:=`SELECT b.Bill_Id,b.Bill_Status,b.Amount,b.Item_Id,b.Customer_Id,i.Item_Name,c.Customer_Name,c.Customer_Phone,b.Bill_Desc
-		FROM Bill AS b
-		LEFT JOIN Item AS i ON b.Item_Id=i.Item_Id
+		fmt.Println("Query in DB")
+
+		Query:=`SELECT bd.BillDetail_Id,bd.Bill_Id,b.Bill_Status,bd.Amount,bd.Item_Id,b.Customer_Id,i.Item_Name,c.Customer_Name,c.Customer_Phone,b.Bill_Desc
+		FROM BillDetail as bd
+		LEFT JOIN Bill AS b ON bd.Bill_Id=b.Bill_Id
+		LEFT JOIN Item AS i ON bd.Item_Id=i.Item_Id
 		LEFT JOIN Customer AS c ON b.Customer_Id=c.Customer_Id `
 		isFirst := true
 
@@ -234,7 +222,7 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 			} else {
 				Query = Query + ` AND`
 			}
-			Query = Query + ` b.Bill_Id="` +strconv.Itoa(int(request.GetBillId()))+`"`
+			Query = Query + ` bd.Bill_Id="` +strconv.Itoa(int(request.GetBillId()))+`"`
 		}
 
 		if request.GetBillStatus() != 0{
@@ -256,7 +244,7 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 			} else {
 				Query = Query + ` AND`
 			}
-			Query = Query + ` b.Item_Id="` +strconv.Itoa(int(request.GetItemId()))+`"`
+			Query = Query + ` bd.Item_Id="` +strconv.Itoa(int(request.GetItemId()))+`"`
 		}
 
 		if request.GetAmount() != 0{
@@ -268,7 +256,7 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 			} else {
 				Query = Query + ` AND`
 			}
-			Query = Query + ` b.Amount="` +strconv.Itoa(int(request.GetAmount()))+`"`
+			Query = Query + ` bd.Amount="` +strconv.Itoa(int(request.GetAmount()))+`"`
 		}
 
 		if Authorized.Authorized==1 && request.GetCustomerId() != 0 {
@@ -292,6 +280,7 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 			}
 			Query = Query + ` b.Customer_Id="` + userId +`"`
 		}
+
 		if request.GetCustomerPhone() != "" && request.GetCustomerPhone() != " "{
 			if isFirst{
 				isFirst = false
@@ -347,8 +336,7 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 	
 		for billDb.Next(){
 			var billQueryDB ElasticDocs
-			fmt.Println(billDb)
-			err := billDb.Scan(&billQueryDB.Bill_Id,&billQueryDB.Bill_Status,&billQueryDB.Amount,&billQueryDB.Item_Id,&billQueryDB.Customer_Id,&billQueryDB.Item_Name,&billQueryDB.Customer_Name,&billQueryDB.Customer_Phone,&billQueryDB.Bill_Desc)
+			err := billDb.Scan(&billQueryDB.BillDetailId,&billQueryDB.BillId,&billQueryDB.BillStatus,&billQueryDB.Amount,&billQueryDB.ItemId,&billQueryDB.CustomerId,&billQueryDB.ItemName,&billQueryDB.CustomerName,&billQueryDB.CustomerPhone,&billQueryDB.BillDesc)
 
 			LogError(err)
 
@@ -356,16 +344,17 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 			go func(bill ElasticDocs){
 				defer Wg.Done()
 
-				billRespone := pb.SearchBillRespone{BillId: int64(bill.Bill_Id),BillStatus: int64(bill.Bill_Status),ItemId: int64(bill.Item_Id),Amount: int64(bill.Amount), CustomerId: int64(bill.Customer_Id), CustomerPhone: bill.Customer_Phone, BillDesc: bill.Bill_Desc, ItemName: bill.Item_Name, CustomerName: bill.Customer_Name}
+				billRespone := pb.SearchBillRespone{BillId: int64(bill.BillId),BillStatus: int64(bill.BillStatus),ItemId: int64(bill.ItemId),Amount: int64(bill.Amount), CustomerId: int64(bill.CustomerId), CustomerPhone: bill.CustomerPhone, BillDesc: bill.BillDesc, ItemName: bill.ItemName, CustomerName: bill.CustomerName}
 
 				mux.Lock()
 				if err = stream.Send(&billRespone);err!=nil{
 					log.Fatal(err)
 				}
 				mux.Unlock()
-				billRequest := pb.CreateBillRequest{ItemId: int64(bill.Item_Id),Amount: int64(bill.Amount), CustomerId: int64(bill.Customer_Id),BillDesc: bill.Bill_Desc}
+				temp := []*pb.CreateBillItem{}
+				billRequest := pb.CreateBillRequest{Item:append(temp,&pb.CreateBillItem{ItemId:int64(bill.ItemId),Amount: int64(bill.Amount)}), CustomerId: int64(bill.CustomerId),BillDesc: bill.BillDesc}
 
-				InsertEs(esclient2,&billRequest,bill.Bill_Id)
+				InsertEs(esclient2,&billRequest,bill.BillDetailId)
 				fmt.Println(billRespone)
 			}(billQueryDB)
 			mux.Lock()
@@ -375,17 +364,19 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 		}
 		//
 	} else {
+		fmt.Println("Query in ES")
+
 		for _,billEs := range billsEs {
 			Wg.Add(1)
 			go func(billEs ElasticDocs){
 				defer Wg.Done()
 
-				billId := billEs.Bill_Id
-				Query := `SELECT b.Bill_Id,b.Bill_Status,b.Amount,b.Item_Id,b.Customer_Id,i.Item_Name,c.Customer_Name,c.Customer_Phone,b.Bill_Desc
-				FROM Bill AS b
-				LEFT JOIN Item AS i ON b.Item_Id=i.Item_Id
+				Query := `SELECT bd.BillDetail_Id,bd.Bill_Id,b.Bill_Status,bd.Amount,bd.Item_Id,b.Customer_Id,i.Item_Name,c.Customer_Name,c.Customer_Phone,b.Bill_Desc
+				FROM BillDetail as bd
+				LEFT JOIN Bill AS b ON bd.Bill_Id=b.Bill_Id
+				LEFT JOIN Item AS i ON bd.Item_Id=i.Item_Id
 				LEFT JOIN Customer AS c ON b.Customer_Id=c.Customer_Id
-				WHERE Bill_Id="` + strconv.Itoa(billId) + `";`
+				WHERE bd.Bill_Id="` + strconv.Itoa(billEs.BillId) + `" AND bd.Item_Id="` + strconv.Itoa(billEs.ItemId) + `";`
 
 				mux.Lock()
 				billDb,err := DB.Query(Query)
@@ -398,14 +389,15 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 
 				
 				for billDb.Next(){
-					err := billDb.Scan(&bill.Bill_Id,&bill.Bill_Status,&bill.Amount,&bill.Item_Id,&bill.Customer_Id,&bill.Item_Name,&bill.Customer_Name,&bill.Customer_Phone,&bill.Bill_Desc)
+					err := billDb.Scan(&bill.BillDetailId,&bill.BillId,&bill.BillStatus,&bill.Amount,&bill.ItemId,&bill.CustomerId,&bill.ItemName,&bill.CustomerName,&bill.CustomerPhone,&bill.BillDesc)
 
 					LogError(err)
 				}
 
-				billRespone := pb.SearchBillRespone{BillId: int64(bill.Bill_Id),BillStatus: int64(bill.Bill_Status),ItemId: int64(bill.Item_Id),Amount: int64(bill.Amount), CustomerId: int64(bill.Customer_Id), CustomerPhone: bill.Customer_Phone, BillDesc: bill.Bill_Desc, ItemName: bill.Item_Name, CustomerName: bill.Customer_Name}
+				billRespone := pb.SearchBillRespone{BillId: int64(bill.BillId),BillStatus: int64(bill.BillStatus),ItemId: int64(bill.ItemId),Amount: int64(bill.Amount), CustomerId: int64(bill.CustomerId), CustomerPhone: bill.CustomerPhone, BillDesc: bill.BillDesc, ItemName: bill.ItemName, CustomerName: bill.CustomerName}
 
 				mux.Lock()
+				glog.Info(`Bill Respone `,billRespone)
 				if err = stream.Send(&billRespone);err!=nil{
 					log.Fatal(err)
 				}
@@ -422,18 +414,34 @@ func (ms *ManageBillServer) SearchBill(request *pb.SearchBillRequest,stream pb.M
 func (ms *ManageBillServer) CreateBill(context context.Context, request *pb.CreateBillRequest) (*pb.CreateBillRespone,error){
 	DB := AccessDB()
 	glog.Info("Create Bill request",request)
-	sqlStatement := `INSERT INTO Bill(Bill_Status,Amount,Item_Id,Customer_Id,Bill_Desc) VALUES('`+strconv.Itoa(1)+`','`+strconv.Itoa(int(request.GetAmount()))+`','`+strconv.Itoa(int(request.GetItemId()))+`','`+strconv.Itoa(int(request.GetCustomerId()))+`','`+request.GetBillDesc()+`')`
 
-	result,err:= DB.Exec(sqlStatement)
+	sqlStatement := `INSERT INTO Bill(Bill_Status,Customer_Id,Bill_Desc,Item_Id) VALUES('`+strconv.Itoa(1)+`','`+strconv.Itoa(int(request.GetCustomerId()))+`','`+request.GetBillDesc()+`','`+strconv.Itoa(0)+`')`
+	
+	result1,err:= DB.Exec(sqlStatement)
 
 	if err!=nil {
 		log.Fatal(err)
 	}
-	esclient,err := GetESClient()
+	insertId,_ := result1.LastInsertId()
+	for _,value := range request.GetItem(){
+		if value.GetAmount()==0 {
+			continue
+		}
+		fmt.Print(value.GetItemId())
 
-	LastInsertId,_ := result.LastInsertId()
-	
-	err = InsertEs(esclient,request,int(LastInsertId))
+		sqlStatement := `INSERT INTO BillDetail(Bill_Id,Amount,Item_Id) VALUES('`+strconv.Itoa(int(insertId))+`','`+strconv.Itoa(int(value.GetAmount()))+`','`+strconv.Itoa(int(value.GetItemId()))+`')`
+		result,err:= DB.Exec(sqlStatement)
+
+		if err!=nil {
+			log.Fatal(err)
+		}
+
+		esclient,err := GetESClient()
+
+		LastInsertId,_ := result.LastInsertId()
+
+		err = InsertEs(esclient,request,int(LastInsertId))
+	}
 
 	return &pb.CreateBillRespone{IsSaved:1},nil
 }

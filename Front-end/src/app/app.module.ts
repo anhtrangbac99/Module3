@@ -15,6 +15,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog' ;
 import { FormsModule } from '@angular/forms';
 import { ModalPaymentComponent } from './modal-payment/modal-payment.component';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,7 @@ import { ModalPaymentComponent } from './modal-payment/modal-payment.component';
     SearchBillComponent,
     HeaderComponent,
     ModalComponent,
-    ModalPaymentComponent
+    ModalPaymentComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,11 +33,10 @@ import { ModalPaymentComponent } from './modal-payment/modal-payment.component';
     MatButtonModule,
     MatDialogModule,
     HttpModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
-  providers: [
-    SignInComponent
-  ],
+
   bootstrap: [AppComponent],
   entryComponents: [
     ModalComponent,

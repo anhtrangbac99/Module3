@@ -4,24 +4,25 @@
     </header>
     <section id="modal-body">
         <form>
+            
             <div class="form-row">
                 <div class="form-group col-md-12">
-                    <label> Item Name</label>
-                    <input name="ItemName" type="text" class="form-control" id="ItemName" placeholder="{{BillDetailForm['ItemName']}}" disabled>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label> Amount </label>
-                    <input name="Amount" type="text" class="form-control" id="Amount" placeholder="{{BillDetailForm['Amount']}}" disabled>
-                </div>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group col-md-12">
-                    <label> Price </label>
-                    <input name="Price" type="text" class="form-control" id="Price" placeholder="{{BillDetailForm['Price']}}" disabled>
+                    <label >List Items</label>
+                    <table class="table">
+                        <thead>
+                            <th scope="col">Item Name</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Price</th>
+                        </thead>
+                        <tbody>
+                                <tr *ngFor="let Item of this.BillDetailForm['ListItem'],let i = index">
+                                    <th scope="row">{{Item['ItemName']}}</th>
+                                    <td>{{Item['Amount']}}</td>
+                                    <td>{{Item['Price']}}</td>
+                                </tr>
+                        </tbody>
+                
+                    </table>
                 </div>
             </div>
 

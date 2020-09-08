@@ -1,3 +1,4 @@
+import { HttpClient,HttpClientModule } from '@angular/common/http';
 import { Component, OnInit, Type } from '@angular/core';
 import { MatDialogConfig, MatDialog } from '@angular/material/dialog';
 import { ModalComponent } from '../modal/modal.component';
@@ -24,7 +25,9 @@ export class SearchBillComponent implements OnInit {
 
   public SearchResults : any
   public Authorized : any
-  constructor(  private matdialog: MatDialog) { }
+  
+
+  constructor(private matdialog: MatDialog,public http : HttpClient) { }
 
   openAddBillModal(): void{
     APIService.CheckToken('/')
@@ -122,7 +125,6 @@ export class SearchBillComponent implements OnInit {
     .then(respone => respone['SearchRespones'])
     .then (data => {
       this.SearchResults = data
-      console.log(this.SearchResults)
     })
   }
     

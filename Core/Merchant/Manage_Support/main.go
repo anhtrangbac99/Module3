@@ -1,8 +1,8 @@
 package main
 
 import (
-	handler "google.golang.org/grpc/examples/App/Core/Merchant/Manage_Support/Handler"
-	pb "google.golang.org/grpc/examples/App/Proto/ManageSupport"
+	handler "git.zapa.cloud/fresher/kietcdx/Module3/App/Core/Merchant/Manage_Support/Handler"
+	pb "git.zapa.cloud/fresher/kietcdx/Module3/App/Proto/Merchant/ManageSupport"
 	//"github.com/jinzhu/copier"
 	"sync"
 	"log"

@@ -102,10 +102,21 @@
                         <td *ngIf="SearchResult['BillStatus']==1">Mới tạo</td>
                         <td *ngIf="SearchResult['BillStatus']==2">Đã thanh toán</td>
                         <td *ngIf="SearchResult['BillStatus']==3">Đã hủy</td>
-
-                        <td>{{SearchResult['Amount']}}</td>
-                        <td>{{SearchResult['ItemId']}}</td>
-                        <td>{{SearchResult['ItemName']}}</td>
+                        <td>
+                            <ul *ngFor="let Item of SearchResult['Item']" class="list-group list-group-flush">
+                                <li class="list-group-item">{{Item['Amount']}}</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul *ngFor="let Item of SearchResult['Item']" class="list-group list-group-flush">
+                                <li class="list-group-item">{{Item['ItemId']}}</li>
+                            </ul>
+                        </td>
+                        <td>
+                            <ul *ngFor="let Item of SearchResult['Item']" class="list-group list-group-flush">
+                                <li class="list-group-item">{{Item['ItemName']}}</li>
+                            </ul>
+                        </td>
                         <td>{{SearchResult['CustomerId']}}</td>
                         <td>{{SearchResult['CustomerPhone']}}</td>
                         <td>{{SearchResult['CustomerName']}}</td>

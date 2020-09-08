@@ -1,7 +1,7 @@
 package handler
 
 import (
-	pb "google.golang.org/grpc/examples/App/Proto/SignIn"
+	pb "git.zapa.cloud/fresher/kietcdx/Module3/App/Proto/Merchant/SignIn"
 	_ "github.com/go-sql-driver/mysql"
 	"database/sql"
 	"log"
@@ -16,10 +16,10 @@ import (
 )
 
 type selectedUser struct {
-	User_Id int
-	Username string 
-	Password string
-	Authorized int
+	UserId int `json:"User_Id"`
+	Username string `json:"Username"` 
+	Password string	`json:"Password"`
+	Authorized int	`json:"Authorized"`
 }
 type SignInServer struct{
 	pb.UnimplementedSignInServer
@@ -75,7 +75,7 @@ func (signInServer *SignInServer) UserAuthor(ctx context.Context,request *pb.Aut
 	} else {
 		for selectedUsers.Next(){
 			var selectedUser selectedUser
-			err = selectedUsers.Scan(&selectedUser.User_Id,&selectedUser.Username,&selectedUser.Password,&selectedUser.Authorized)
+			err = selectedUsers.Scan(&selectedUser.UserId,&selectedUser.Username,&selectedUser.Password,&selectedUser.Authorized)
 			//fmt.Println(selectedUser)
 			if err != nil {
 				log.Fatal(err)
@@ -87,7 +87,7 @@ func (signInServer *SignInServer) UserAuthor(ctx context.Context,request *pb.Aut
 				authorized = selectedUser.Authorized
 				fmt.Println(user_Id)
 				
-				err = RDB.Set(context.Background(),user_Id,strconv.Itoa(selectedUser.User_Id),15*time.Minute).Err()
+				err = RDB.Set(context.Background(),user_Id,strconv.Itoa(selectedUser.UserId),15*time.Minute).Err()
 
 				if err !=nil{
 					log.Fatal(err)
